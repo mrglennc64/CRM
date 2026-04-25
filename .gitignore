@@ -5,6 +5,10 @@
 *.key
 *.pem
 
+# Personal notes (may contain pasted secrets/blueprints)
+*.txt
+!**/README.txt
+
 # Dependencies
 node_modules/
 .next/
@@ -33,10 +37,3 @@ fonts/
 *.log
 .idea/
 .vscode/
-
-# Personal notes (uncomment to ignore — keeping them in repo for now)
-# 11lab.txt
-# server1.txt
-# marketing1.txt
-# trapcrm.txt
-# thehunt.txt
