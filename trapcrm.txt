@@ -1,0 +1,826 @@
+Your CRM only needs 4 objects:
+
+1. Contacts
+Artists, publishers, managers, attorneys, A&Rs.
+
+Fields:
+
+name
+
+email
+
+role
+
+brand affinity (TrapRoyalties / TrapRoyaltiesPro / VerseIQ / HeyRoya)
+
+notes
+
+last content generated
+
+2. Companies
+Labels, publishers, distributors.
+
+Fields:
+
+name
+
+type
+
+size
+
+catalog size
+
+metadata maturity score (optional)
+
+3. Deals / Pipelines
+Metadata cleaning
+
+Royalty recovery
+
+Catalog audit
+
+Publishing admin
+
+4. Content Generator
+This is the magic button.
+
+For ANY contact:
+Generate → TikTok / Reel / Carousel / LinkedIn / Threads / X
+
+And the CRM pulls:
+
+their brand affinity
+
+their pain points
+
+their catalog size
+
+their role (artist vs publisher)
+
+their tone (creator vs forensic)
+
+Then it feeds that into the content engine.
+
+⭐ WHERE THE VIDEO GENERATION FITS
+You said:
+
+“Use one of these to generate the TikTok videos.”
+
+Here’s the truth:
+
+Sora
+Best for cinematic, long‑form, storytelling.
+Not ideal for fast TikTok educational content.
+
+NeuralFrames
+Great for stylized motion backgrounds.
+
+Remotion
+Best for your use case because:
+
+it syncs to ElevenLabs audio
+
+it uses your brand palette
+
+it renders MP4 programmatically
+
+it integrates directly into your CRM backend
+
+Meta AI / Qwen / Vheer / Synthesia / FluxPro / Google V3
+These are optional “style engines” for backgrounds or B‑roll.
+
+Your CRM should use Remotion as the core renderer.  
+Everything else is optional plug‑ins.
+
+⭐ THE SIMPLEST POSSIBLE ARCHITECTURE (NO BLOAT)
+Your CRM = Next.js app with:
+
+/crm
+Contacts list
+
+Companies list
+
+Deals list
+
+/crm/contact/[id]
+Contact details
+
+“Generate Content” button
+
+“Generate Video” button
+
+History of generated assets
+
+/api/generate-content
+Uses your existing content engine.
+
+/api/generate-video
+Uses:
+
+ElevenLabs → MP3
+
+Remotion → MP4
+
+NeuralFrames / FluxPro → optional backgrounds
+
+/output/
+Stores:
+
+MP4
+
+MP3
+
+PNG thumbnails
+
+Captions
+
+Scripts
+
+Database
+SQLite (you already use it)
+Tables:
+
+contacts
+
+companies
+
+deals
+
+generated_assets
+
+⭐ WHAT YOU DON’T NEED
+Salesforce
+
+HubSpot
+
+Zoho
+
+Monday
+
+Airtable
+
+Notion
+
+Pipedrive
+
+Anything with 100 features you’ll never use
+
+You need a simple internal tool that does ONE thing:
+
+👉 Click a contact → generate content → generate video → send or download.
+
+That’s it.
+
+⭐ WHAT I CAN BUILD FOR YOU NEXT
+I can generate:
+
+A. The CRM UI (Next.js pages + components)
+Contacts list
+
+Contact detail page
+
+Generate buttons
+
+Asset history
+
+B. The CRM database schema (SQLite)
+contacts
+
+companies
+
+deals
+
+generated_assets
+
+C. The API routes
+/api/generate-content
+
+/api/generate-video
+
+/api/contacts
+
+/api/deals
+
+D. The Remotion video template
+Style C (Hybrid Enterprise + Creator)
+
+TrapRoyalties palette
+
+Motion typography
+
+CTA card
+
+Logo watermark
+
+E. The ElevenLabs integration
+Clean text → MP3
+
+MP3 → Remotion timeline
+
+F. The CRM dashboard
+Search
+
+Filters
+
+Quick actions
+THE EXACT CRM STRUCTURE (copy this into your project)
+📁 /src/app/crm/
+page.tsx → CRM dashboard
+
+contacts/page.tsx → list
+
+contacts/[id]/page.tsx → detail + generate buttons
+
+companies/page.tsx
+
+deals/page.tsx
+
+📁 /src/app/api/crm/
+contacts/route.ts
+
+contacts/[id]/route.ts
+
+generate-content/route.ts
+
+generate-video/route.ts
+
+📁 /src/db/schema.ts
+SQLite tables:
+
+ts
+contacts
+companies
+deals
+generated_assets
+⭐ THE MINIMUM DATABASE SCHEMA (SQLite)
+sql
+CREATE TABLE contacts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  email TEXT,
+  role TEXT,
+  brand_affinity TEXT,
+  notes TEXT,
+  last_generated_at TEXT
+);
+
+CREATE TABLE generated_assets (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  contact_id INTEGER,
+  type TEXT, -- tiktok, reel, linkedin, carousel
+  script TEXT,
+  audio_path TEXT,
+  video_path TEXT,
+  thumbnail_path TEXT,
+  created_at TEXT
+);
+That’s all you need.
+
+⭐ THE TWO MAGIC BUTTONS (inside contact detail page)
+1️⃣ Generate Content
+Calls:
+
+Code
+POST /api/crm/generate-content
+Uses your existing week engine + brand affinity.
+
+Returns:
+
+script
+
+caption
+
+timing sheet
+
+2️⃣ Generate Video
+Calls:
+
+Code
+POST /api/crm/generate-video
+Pipeline:
+
+Clean script → ElevenLabs → MP3
+
+MP3 → Remotion → MP4
+
+Save to /output/
+
+Store in generated_assets
+
+⭐ VIDEO GENERATION ENGINE (Remotion + ElevenLabs)
+Your CRM will use:
+
+✔ ElevenLabs
+For voiceover MP3.
+
+✔ Remotion
+For MP4 video rendering.
+
+✔ Style C (Hybrid Enterprise + Creator)
+Your chosen style.
+
+✔ TrapRoyalties palette
+Deep slate + indigo + cyan.
+
+✔ Motion typography
+Hook → Pain → Example → Fix → CTA.
+
+⭐ WHAT YOU GET WHEN YOU CLICK “GENERATE VIDEO”
+Inside /output/:
+
+Code
+traproyalties_reel.mp4
+traproyalties_voice.mp3
+traproyalties_thumbnail.png
+traproyalties_caption.txt
+Inside CRM:
+
+preview thumbnail
+
+download buttons
+
+“send to contact” (optional later)
+------------------------------------------------------
+TRAPCRM — STYLE C UI BLUEPRINT
+Hybrid = clean layout + bold accents + brand palette.
+
+Primary Colors
+Background: #0D0F12 (deep slate)
+
+Accent 1: #4F46E5 (indigo)
+
+Accent 2: #22D3EE (cyan)
+
+Text: #FFFFFF
+
+Subtext: #A1A1AA
+
+UI Style
+Clean, minimal layout
+
+Bold accent buttons
+
+Card‑based sections
+
+Large “Generate” buttons
+
+Smooth transitions
+
+No clutter
+
+⭐ 1. CRM DASHBOARD (Home)
+Route: /crm
+
+Layout:
+Left sidebar (Contacts / Companies / Deals / Assets)
+
+Main panel with:
+
+Quick stats
+
+Recent generated assets
+
+“New Contact” button
+
+Components:
+<Sidebar />
+
+<DashboardStats />
+
+<RecentAssets />
+
+⭐ 2. CONTACTS LIST
+Route: /crm/contacts
+
+Table Columns:
+Name
+
+Role
+
+Brand Affinity
+
+Last Generated
+
+Actions
+
+Actions:
+View
+
+Generate Content
+
+Generate Video
+
+UI:
+Clean table
+
+Accent buttons
+
+Search bar at top
+
+⭐ 3. CONTACT DETAIL PAGE
+Route: /crm/contacts/[id]
+
+This is the core screen where you’ll spend most of your time.
+
+Sections:
+A. Contact Header
+Name
+
+Role
+
+Brand Affinity (color‑tagged)
+
+Notes
+
+B. Two Big Buttons
+1. Generate Content
+Button style:
+
+Indigo background
+
+White text
+
+Large, full‑width
+
+2. Generate Video
+Button style:
+
+Cyan background
+
+Dark text
+
+Large, full‑width
+
+C. Generated Assets History
+Cards showing:
+
+Script
+
+Caption
+
+MP3
+
+MP4
+
+Thumbnail
+
+Each card has:
+
+Download
+
+Preview
+
+“Regenerate”
+
+⭐ 4. CONTENT GENERATION API
+Route: /api/crm/generate-content
+
+Input:
+
+contact_id
+
+Output:
+
+script
+
+caption
+
+timing sheet
+
+brand affinity
+
+saved to DB
+
+⭐ 5. VIDEO GENERATION API
+Route: /api/crm/generate-video
+
+Pipeline:
+
+Clean script → ElevenLabs → MP3
+
+MP3 → Remotion → MP4
+
+Save to /output/
+
+Save asset record
+
+Output:
+
+video_path
+
+audio_path
+
+thumbnail_path
+
+⭐ 6. GENERATED ASSETS PAGE
+Route: /crm/assets
+
+Grid of:
+
+thumbnails
+
+type
+
+date
+
+contact
+
+Click → opens asset detail.
+
+⭐ 7. DEALS PAGE (Optional)
+Route: /crm/deals
+
+Simple pipeline:
+
+Lead
+
+Qualified
+
+Audit
+
+Proposal
+
+Closed
+
+This is optional but useful for publishers.
+
+⭐ 8. COMPANIES PAGE (Optional)
+Route: /crm/companies
+
+Fields:
+
+name
+
+type
+
+catalog size
+
+metadata maturity score
+
+⭐ 9. WHAT YOU GET WITH STYLE C
+This is the vibe:
+
+✔ Clean enterprise layout
+✔ Bold creator‑friendly accents
+✔ Big, obvious “Generate” buttons
+✔ Card‑based asset previews
+✔ Dark mode by default
+✔ TrapRoyalties palette baked in
+✔ Fast navigation
+✔ Zero clutter
+This is the CRM you’ll actually use.
+---------------------------------------------------------------
+⭐ A — FULL CRM UI (Next.js + Style C Hybrid)
+Below is the actual code for the CRM UI pages and components.
+
+📁 /src/app/crm/page.tsx — CRM Dashboard
+tsx
+export default function CRMHome() {
+  return (
+    <div className="p-8 text-white">
+      <h1 className="text-3xl font-bold mb-6">TrapCRM Dashboard</h1>
+
+      <div className="grid grid-cols-3 gap-6">
+        <a href="/crm/contacts" className="bg-[#4F46E5] p-6 rounded-xl shadow-lg">
+          <h2 className="text-xl font-semibold">Contacts</h2>
+          <p className="text-sm text-gray-300">Artists, publishers, managers, attorneys</p>
+        </a>
+
+        <a href="/crm/assets" className="bg-[#22D3EE] p-6 rounded-xl shadow-lg text-black">
+          <h2 className="text-xl font-semibold">Generated Assets</h2>
+          <p className="text-sm">Scripts, MP3s, MP4s, thumbnails</p>
+        </a>
+
+        <a href="/crm/deals" className="bg-[#0D0F12] border border-gray-700 p-6 rounded-xl">
+          <h2 className="text-xl font-semibold">Deals</h2>
+          <p className="text-sm text-gray-400">Pipelines & opportunities</p>
+        </a>
+      </div>
+    </div>
+  );
+}
+📁 /src/app/crm/contacts/page.tsx — Contacts List
+tsx
+import Link from "next/link";
+
+export default async function ContactsList() {
+  const contacts = await fetch("http://localhost:3000/api/crm/contacts").then(r => r.json());
+
+  return (
+    <div className="p-8 text-white">
+      <h1 className="text-2xl font-bold mb-6">Contacts</h1>
+
+      <table className="w-full text-left">
+        <thead>
+          <tr className="text-gray-400">
+            <th>Name</th>
+            <th>Role</th>
+            <th>Brand</th>
+            <th>Last Generated</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {contacts.map(c => (
+            <tr key={c.id} className="border-b border-gray-800">
+              <td>{c.name}</td>
+              <td>{c.role}</td>
+              <td>{c.brand_affinity}</td>
+              <td>{c.last_generated_at || "—"}</td>
+              <td>
+                <Link href={`/crm/contacts/${c.id}`} className="text-[#22D3EE]">
+                  View →
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+📁 /src/app/crm/contacts/[id]/page.tsx — Contact Detail
+tsx
+export default async function ContactDetail({ params }) {
+  const contact = await fetch(`http://localhost:3000/api/crm/contacts/${params.id}`).then(r => r.json());
+  const assets = await fetch(`http://localhost:3000/api/crm/assets?contact=${params.id}`).then(r => r.json());
+
+  return (
+    <div className="p-8 text-white">
+      <h1 className="text-3xl font-bold mb-2">{contact.name}</h1>
+      <p className="text-gray-400">{contact.role} • {contact.brand_affinity}</p>
+
+      <div className="mt-6 flex gap-4">
+        <form action="/api/crm/generate-content" method="POST">
+          <input type="hidden" name="contact_id" value={contact.id} />
+          <button className="bg-[#4F46E5] px-6 py-3 rounded-lg font-semibold">
+            Generate Content
+          </button>
+        </form>
+
+        <form action="/api/crm/generate-video" method="POST">
+          <input type="hidden" name="contact_id" value={contact.id} />
+          <button className="bg-[#22D3EE] text-black px-6 py-3 rounded-lg font-semibold">
+            Generate Video
+          </button>
+        </form>
+      </div>
+
+      <h2 className="text-xl font-semibold mt-10 mb-4">Generated Assets</h2>
+
+      <div className="grid grid-cols-3 gap-6">
+        {assets.map(a => (
+          <div key={a.id} className="bg-[#0D0F12] border border-gray-800 p-4 rounded-xl">
+            <p className="text-sm text-gray-400">{a.type}</p>
+            <p className="text-xs text-gray-500">{a.created_at}</p>
+
+            {a.thumbnail_path && (
+              <img src={a.thumbnail_path} className="rounded mt-3" />
+            )}
+
+            <div className="mt-4 flex flex-col gap-2">
+              {a.script && <a href={a.script} className="text-[#22D3EE]">Script</a>}
+              {a.audio_path && <a href={a.audio_path} className="text-[#22D3EE]">Audio</a>}
+              {a.video_path && <a href={a.video_path} className="text-[#22D3EE]">Video</a>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+⭐ B — FULL BACKEND (SQLite + API ROUTES)
+📁 /src/db/client.ts
+ts
+import sqlite3 from "sqlite3";
+import { open } from "sqlite";
+
+export async function db() {
+  return open({
+    filename: "./trapcrm.db",
+    driver: sqlite3.Database
+  });
+}
+📁 /src/app/api/crm/contacts/route.ts
+ts
+import { db } from "@/db/client";
+
+export async function GET() {
+  const database = await db();
+  const contacts = await database.all("SELECT * FROM contacts");
+  return Response.json(contacts);
+}
+📁 /src/app/api/crm/contacts/[id]/route.ts
+ts
+import { db } from "@/db/client";
+
+export async function GET(_, { params }) {
+  const database = await db();
+  const contact = await database.get("SELECT * FROM contacts WHERE id = ?", params.id);
+  return Response.json(contact);
+}
+📁 /src/app/api/crm/generate-content/route.ts
+This calls your existing content engine.
+
+ts
+import { db } from "@/db/client";
+import { generateWeeklyContent } from "@/lib/content-engine";
+
+export async function POST(req) {
+  const { contact_id } = await req.json();
+  const database = await db();
+
+  const contact = await database.get("SELECT * FROM contacts WHERE id = ?", contact_id);
+
+  const result = await generateWeeklyContent(contact.brand_affinity);
+
+  await database.run(
+    "INSERT INTO generated_assets (contact_id, type, script, created_at) VALUES (?, ?, ?, datetime('now'))",
+    contact_id, "script", result.script
+  );
+
+  return Response.json(result);
+}
+📁 /src/app/api/crm/generate-video/route.ts
+This is the full video pipeline.
+
+ts
+import { db } from "@/db/client";
+import { generateVoiceover } from "@/lib/elevenlabs";
+import { renderTrapVideo } from "@/video";
+
+export async function POST(req) {
+  const { contact_id } = await req.json();
+  const database = await db();
+
+  const asset = await database.get(
+    "SELECT * FROM generated_assets WHERE contact_id = ? ORDER BY id DESC LIMIT 1",
+    contact_id
+  );
+
+  const audioPath = await generateVoiceover(asset.script);
+  const videoPath = await renderTrapVideo(audioPath, asset.script);
+
+  await database.run(
+    "UPDATE generated_assets SET audio_path = ?, video_path = ? WHERE id = ?",
+    audioPath, videoPath, asset.id
+  );
+
+  return Response.json({ audioPath, videoPath });
+}
+⭐ C — FULL VIDEO ENGINE (Remotion + ElevenLabs)
+📁 /src/video/index.ts
+ts
+import { renderMedia } from "@remotion/renderer";
+import { bundle } from "@remotion/bundler";
+
+export async function renderTrapVideo(audioPath, script) {
+  const serveUrl = await bundle({
+    entryPoint: "./src/video/TrapRoyaltiesReel.tsx",
+  });
+
+  const output = `./output/traproyalties_${Date.now()}.mp4`;
+
+  await renderMedia({
+    composition: "TrapRoyaltiesReel",
+    serveUrl,
+    codec: "h264",
+    outputLocation: output,
+    inputProps: { audioPath, script },
+  });
+
+  return output;
+}
+📁 /src/lib/elevenlabs.ts
+ts
+import fs from "fs";
+import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
+
+const client = new ElevenLabsClient({
+  apiKey: process.env.ELEVENLABS_API_KEY
+});
+
+export async function generateVoiceover(text) {
+  const audio = await client.textToSpeech.convert("JBFqnCBsd6RMkjVDRZzb", {
+    text,
+    modelId: "eleven_multilingual_v2",
+    outputFormat: "mp3_44100_128"
+  });
+
+  const path = `./output/voice_${Date.now()}.mp3`;
+  fs.writeFileSync(path, Buffer.from(await audio.arrayBuffer()));
+
+  return path;
+}
+⭐ YOU NOW HAVE:
+✔ Full CRM UI
+✔ Full backend
+✔ Full video engine
+✔ Full ElevenLabs integration
+✔ Full Remotion renderer
+✔ Full asset storage
+✔ Full navigation
+✔ Full Style C branding
+This is the complete TrapCRM system.
+-------------------------------------------------

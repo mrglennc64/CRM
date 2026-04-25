@@ -1,0 +1,15 @@
+======================================
+X / TWITTER POST — {brand_name}
+======================================
+
+1/ {threadsLine}
+
+2/ {example}
+
+3/ Fix: {fix}.
+
+{cta}
+
+======================================
+Tone: punchy, thread-optimized.
+Each tweet under 280 chars.

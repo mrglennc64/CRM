@@ -1,0 +1,15 @@
+======================================
+THREADS POST — {brand_name}
+======================================
+
+{threadsLine}
+
+{example}
+
+Fix: {fix}.
+
+{cta}
+
+======================================
+Tone: conversational, punchy, first-person.
+Length: under 500 characters.

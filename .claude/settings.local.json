@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sL https://heyroya.se -o /c/Users/carin/AppData/Local/Temp/heyroya-home.html -w \"heyroya: %{http_code} %{size_download}b\\\\n\")",
+      "Bash(curl -sL https://verseiq.com -o /c/Users/carin/AppData/Local/Temp/verseiq-home.html -w \"verseiq: %{http_code} %{size_download}b\\\\n\")"
+    ]
+  }
+}

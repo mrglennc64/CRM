@@ -1,0 +1,23 @@
+======================================
+TIKTOK / IG REEL SCRIPT — {brand_name}
+======================================
+
+HOOK (on-screen text, 5-7 words):
+{emotionalHook}
+
+PAIN (voiceover, 1-2 sentences):
+{problem}. {impact}
+
+REAL EXAMPLE (voiceover):
+{example}
+
+FIX (quick, non-technical):
+{fix}.
+
+CTA:
+{cta}
+
+======================================
+Tone: fast, emotional, creator-friendly.
+Length: 15-25 seconds.
+Caption: Same hook + CTA.

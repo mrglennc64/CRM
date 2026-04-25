@@ -1,0 +1,26 @@
+======================================
+IG CAROUSEL — {brand_name}
+======================================
+
+SLIDE 1 (bold cover statement):
+{emotionalHook}
+
+SLIDE 2 (why this happens):
+{problem}.
+
+SLIDE 3 (real example):
+{example}
+
+SLIDE 4 (what you lose):
+{impact}
+
+SLIDE 5 (how to fix it):
+{fix}.
+
+SLIDE 6 (CTA):
+{cta}
+
+======================================
+Tone: simple, visual, swipe-friendly.
+Design: bold text, clean background, brand colors.
+Caption: 1-line hook + CTA.

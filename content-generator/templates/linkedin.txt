@@ -1,0 +1,20 @@
+======================================
+LINKEDIN POST — {brand_name}
+======================================
+
+{forensicOpener}
+
+{example}
+
+{impact}
+
+For {who}, this isn't just a metadata issue — it's delayed cash flow, society rejections, and disputes that are avoidable with proper upstream validation.
+
+The fix: {fix}.
+
+{cta}
+
+======================================
+Tone: professional, forensic, compliance-driven.
+Target: publishers, rights teams, music attorneys.
+Length: 120-180 words.

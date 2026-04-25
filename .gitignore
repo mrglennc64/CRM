@@ -1,0 +1,42 @@
+# Secrets — never commit
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# Dependencies
+node_modules/
+.next/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated outputs
+output/
+trapcrm/output/
+content-generator/output/
+*.db
+*.db-journal
+*.db-wal
+
+# Builds & artifacts
+dist/
+build/
+*.mp3
+*.mp4
+fonts/
+
+# Editor / OS
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# Personal notes (uncomment to ignore — keeping them in repo for now)
+# 11lab.txt
+# server1.txt
+# marketing1.txt
+# trapcrm.txt
+# thehunt.txt

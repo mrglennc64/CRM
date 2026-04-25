@@ -1,0 +1,28 @@
+FULL SERVER READ‑ONLY (strongest protection)
+Run this on srv1:
+
+Code
+mount -o remount,ro /
+This makes the entire root filesystem read‑only.
+
+What happens after this:
+Websites still load
+
+Nginx still runs
+
+PHP still runs
+
+Static files still serve
+
+But NOTHING can be written or changed
+
+Even root cannot modify files until you unlock it
+
+To unlock (when YOU want to update something):
+Code
+mount -o remount,rw /
+Then make your changes, then lock it again:
+
+Code
+mount -o remount,ro /
+This is the safest possible setup.

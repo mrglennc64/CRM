@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.env
+.env.local
+trapcrm.db
+trapcrm.db-journal
+trapcrm.db-wal
+output/
+*.log
+.DS_Store

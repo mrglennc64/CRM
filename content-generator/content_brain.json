@@ -1,0 +1,124 @@
+{
+  "insights": [
+    {
+      "id": "unmatched-isrcs",
+      "problem": "Unmatched ISRCs across DSPs",
+      "who": "artists, publishers",
+      "impact": "Royalties get stuck in DSP reconciliation. 10-30% leakage is typical.",
+      "example": "We scanned a catalog: 12 tracks, CA$2,000 missing due to metadata gaps.",
+      "fix": "Clean metadata + align ISRCs across DSPs",
+      "brandAffinity": ["heyroya", "trp-pro", "verseiq", "traproyalties"],
+      "emotionalHook": "You're getting streams but not getting paid.",
+      "forensicOpener": "Many catalogs quietly lose 10-30% of royalties due to unmatched ISRCs across DSPs.",
+      "threadsLine": "Your ISRC doesn't match your metadata? Your royalties are stuck in limbo."
+    },
+    {
+      "id": "missing-contributors",
+      "problem": "Missing writers and publishers",
+      "who": "artists, publishers",
+      "impact": "PRO rejections, delayed payouts, works unable to be registered.",
+      "example": "In a recent scan, 8 works had missing publisher information.",
+      "fix": "Add missing contributors + validate IPIs",
+      "brandAffinity": ["heyroya", "trp-pro", "verseiq", "traproyalties"],
+      "emotionalHook": "Your PRO can't pay you if THIS is missing.",
+      "forensicOpener": "Missing contributors are one of the top reasons works get rejected by PROs.",
+      "threadsLine": "Missing writer or publisher on a work? That's an automatic PRO rejection."
+    },
+    {
+      "id": "broken-splits",
+      "problem": "Broken splits that don't total 100%",
+      "who": "publishers, songwriters",
+      "impact": "Conflicts, disputes, delayed registration. Societies freeze payouts until resolved.",
+      "example": "We found 3 works with invalid share totals in a single catalog.",
+      "fix": "Correct splits + verify ownership",
+      "brandAffinity": ["heyroya", "trp-pro"],
+      "emotionalHook": "Your splits are costing you money.",
+      "forensicOpener": "Broken splits create conflicts that block royalties at the society level.",
+      "threadsLine": "If your splits don't total 100%, the society freezes the work. No payouts."
+    },
+    {
+      "id": "missing-iswc",
+      "problem": "Works missing ISWC",
+      "who": "artists, publishers",
+      "impact": "Global societies cannot match or pay the work.",
+      "example": "We scanned a catalog with 6 works missing ISWC.",
+      "fix": "Assign or request ISWC from your society",
+      "brandAffinity": ["heyroya", "trp-pro", "verseiq"],
+      "emotionalHook": "No ISWC = no international royalties.",
+      "forensicOpener": "ISWC is the backbone of global royalty matching.",
+      "threadsLine": "Work with no ISWC = invisible to every society outside the US."
+    },
+    {
+      "id": "invalid-ipis",
+      "problem": "Invalid or outdated IPI numbers",
+      "who": "publishers, writers",
+      "impact": "Registration failures, wrong writer attribution, no payout.",
+      "example": "We found 3 writers with invalid IPIs in a recent scan.",
+      "fix": "Update IPI + validate against CISAC database",
+      "brandAffinity": ["heyroya", "trp-pro"],
+      "emotionalHook": "Your IPI might be outdated.",
+      "forensicOpener": "Outdated IPIs cause silent registration failures across societies.",
+      "threadsLine": "Your IPI is the key to your royalties. If it's wrong, nothing pays out."
+    },
+    {
+      "id": "duplicate-works",
+      "problem": "Duplicate works in the catalog",
+      "who": "publishers",
+      "impact": "Double registrations, society conflicts, blocked payouts.",
+      "example": "We found a duplicate work blocking payouts in a 200-track catalog.",
+      "fix": "Merge duplicates + correct metadata",
+      "brandAffinity": ["heyroya", "trp-pro"],
+      "emotionalHook": "You might have duplicate works and not know it.",
+      "forensicOpener": "Duplicate works create conflicts that cascade across all societies.",
+      "threadsLine": "One duplicate work in your catalog can freeze payouts on the real one."
+    },
+    {
+      "id": "foreign-society-gaps",
+      "problem": "Foreign society registration gaps",
+      "who": "artists, publishers",
+      "impact": "Lost international royalties. Foreign societies can't match your metadata.",
+      "example": "We identified €47,000 in missing royalties for a single Nordic catalog.",
+      "fix": "Align metadata across territories + register with foreign societies",
+      "brandAffinity": ["heyroya", "trp-pro", "verseiq"],
+      "emotionalHook": "You're losing money overseas.",
+      "forensicOpener": "International royalties are the most overlooked revenue stream in publishing.",
+      "threadsLine": "A Nordic catalog we scanned had €47k in foreign royalties just sitting there."
+    },
+    {
+      "id": "neighboring-rights",
+      "problem": "Missing neighboring rights (NR) data",
+      "who": "artists, performers",
+      "impact": "SoundExchange and foreign NR societies can't pay out.",
+      "example": "Artist missing $1,200 in SoundExchange NR payouts.",
+      "fix": "Add performer roles + align ISRCs with NR registrations",
+      "brandAffinity": ["verseiq", "traproyalties", "trp-pro"],
+      "emotionalHook": "SoundExchange owes you money.",
+      "forensicOpener": "Neighboring rights are under-claimed across 40% of independent catalogs.",
+      "threadsLine": "If you're a performer, SoundExchange probably owes you money you've never claimed."
+    },
+    {
+      "id": "unregistered-works",
+      "problem": "Unregistered works",
+      "who": "artists",
+      "impact": "Zero royalties collected. Work is invisible to PROs.",
+      "example": "Artist had 4 unregistered works across 3 releases.",
+      "fix": "Register via your PRO + clean metadata before submission",
+      "brandAffinity": ["verseiq", "traproyalties"],
+      "emotionalHook": "Unregistered = zero royalties.",
+      "forensicOpener": "Unregistered works are a preventable revenue loss with proper intake workflows.",
+      "threadsLine": "If your song isn't registered with a PRO, no amount of streams will pay you."
+    },
+    {
+      "id": "cross-territory-mismatches",
+      "problem": "Metadata mismatches across territories",
+      "who": "publishers",
+      "impact": "Payouts blocked because US, UK, and EU systems see different metadata.",
+      "example": "UK vs US metadata mismatch caused £3,400 to be held by PRS.",
+      "fix": "Normalize metadata + CWR-ready export per territory",
+      "brandAffinity": ["heyroya", "trp-pro"],
+      "emotionalHook": "Your metadata looks different in every country.",
+      "forensicOpener": "Metadata normalization across territories is the single biggest lever for global royalty collection.",
+      "threadsLine": "If your song looks different in US vs UK, the money gets stuck between societies."
+    }
+  ]
+}
