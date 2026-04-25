@@ -5,7 +5,7 @@
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { existsSync, statSync, readdirSync } from 'node:fs';
-import { join, resolve, basename, dirname } from 'node:path';
+import { join, resolve, dirname } from 'node:path';
 import { generateVoiceover } from './tts-bridge';
 
 const exec = promisify(execFile);
@@ -16,9 +16,9 @@ const REEL_ENGINE = resolve(
 );
 
 export interface RenderOptions {
-  scriptTxtPath: string;     // absolute
+  scriptTxtPath: string;
   brandId: string;
-  outMp4Path: string;        // absolute
+  outMp4Path: string;
 }
 
 export async function renderReel(opts: RenderOptions): Promise<string> {
@@ -45,15 +45,36 @@ export async function renderReel(opts: RenderOptions): Promise<string> {
   return opts.outMp4Path;
 }
 
+/**
+ * Find tiktok scripts in a bundle. Handles two layouts produced by generate.py:
+ *   1. Folder layout (current): <brand>/<day>_tiktok/script.txt
+ *   2. Flat layout (legacy):    <brand>/<day>_tiktok.txt
+ */
 export function findTikTokScripts(bundleDir: string): { path: string; brandId: string }[] {
   const hits: { path: string; brandId: string }[] = [];
   if (!existsSync(bundleDir)) return hits;
+
   for (const brandDir of readdirSync(bundleDir)) {
     const fullBrand = join(bundleDir, brandDir);
     if (!statSync(fullBrand).isDirectory()) continue;
+
     for (const f of readdirSync(fullBrand)) {
-      if (f.toLowerCase().includes('tiktok') && f.endsWith('.txt')) {
-        hits.push({ path: join(fullBrand, f), brandId: brandDir });
+      const fullF = join(fullBrand, f);
+      const isDir = statSync(fullF).isDirectory();
+      const lname = f.toLowerCase();
+
+      // Layout 1: <brand>/<day>_tiktok/script.txt
+      if (isDir && lname.includes('tiktok')) {
+        const scriptPath = join(fullF, 'script.txt');
+        if (existsSync(scriptPath)) {
+          hits.push({ path: scriptPath, brandId: brandDir });
+        }
+        continue;
+      }
+
+      // Layout 2: <brand>/<day>_tiktok.txt
+      if (!isDir && lname.includes('tiktok') && f.endsWith('.txt')) {
+        hits.push({ path: fullF, brandId: brandDir });
       }
     }
   }
