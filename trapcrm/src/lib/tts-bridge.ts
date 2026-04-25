@@ -1,7 +1,7 @@
 /**
  * Voiceover via ElevenLabs JS SDK (native — no Python shell-out).
  *
- * Voice: tXoAX6rzg9vkoUfJKy0k (your cloned voice)
+ * Voice: zwbQ2XUiIlOKD6b3JWXd (your cloned voice)
  * Model: eleven_multilingual_v2
  * Format: mp3_44100_128
  *
@@ -11,7 +11,7 @@ import { ElevenLabsClient } from '@elevenlabs/elevenlabs-js';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 // Your cloned voice — never overridden
-export const VOICE_ID = 'tXoAX6rzg9vkoUfJKy0k';
+export const VOICE_ID = 'zwbQ2XUiIlOKD6b3JWXd';
 export const MODEL_ID = 'eleven_multilingual_v2';
 export const OUTPUT_FORMAT = 'mp3_44100_128';
 
