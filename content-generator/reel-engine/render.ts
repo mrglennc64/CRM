@@ -1,14 +1,15 @@
 /**
  * CLI renderer — takes a tiktok .txt + .mp3 + brand id → outputs reel.mp4
  *
- * Usage:
- *   npx tsx render.ts <script.txt> <audio.mp3> <brandId> <output.mp4>
+ * Note: copies the MP3 into reel-engine/public/ before render, because
+ * Remotion's renderer can only serve assets from its public folder
+ * (no file:// URIs allowed).
  */
 import { bundle } from '@remotion/bundler';
 import { getCompositions, renderMedia } from '@remotion/renderer';
-import * as fs from 'fs';
-import * as path from 'path';
-import { fileURLToPath } from 'url';
+import { copyFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { parseScript } from './src/parseScript';
 import { BRANDS } from './src/brands';
 
@@ -28,30 +29,29 @@ async function main() {
     process.exit(1);
   }
 
-  const raw = fs.readFileSync(scriptPath, 'utf-8');
-  const script = parseScript(raw);
+  if (!existsSync(scriptPath)) { console.error(`Script not found: ${scriptPath}`); process.exit(1); }
+  if (!existsSync(audioPath))  { console.error(`Audio not found: ${audioPath}`);   process.exit(1); }
 
-  if (!fs.existsSync(audioPath)) {
-    console.error(`Audio not found: ${audioPath}`);
-    process.exit(1);
-  }
-  const absAudio = path.resolve(audioPath);
-  const audioSrc = `file://${absAudio.replace(/\\/g, '/')}`;
+  const script = parseScript(readFileSync(scriptPath, 'utf-8'));
 
-  console.log(`Bundling Remotion project...`);
+  // Copy audio into reel-engine/public/ — Remotion only serves from there
+  const publicDir = path.join(__dirname, 'public');
+  if (!existsSync(publicDir)) mkdirSync(publicDir, { recursive: true });
+  const audioFilename = 'audio.mp3';
+  copyFileSync(audioPath, path.join(publicDir, audioFilename));
+  console.log(`Audio copied → public/${audioFilename}`);
+
+  console.log('Bundling Remotion project...');
   const bundleLocation = await bundle({
     entryPoint: path.join(__dirname, 'src', 'index.ts'),
+    publicDir,
   });
 
-  console.log(`Resolving composition...`);
-  const comps = await getCompositions(bundleLocation, {
-    inputProps: { script, brand, audioSrc },
-  });
+  console.log('Resolving composition...');
+  const inputProps = { script, brand, audioSrc: audioFilename };
+  const comps = await getCompositions(bundleLocation, { inputProps });
   const comp = comps.find((c) => c.id === 'TrapReel');
-  if (!comp) {
-    console.error('Composition "TrapReel" not found.');
-    process.exit(1);
-  }
+  if (!comp) { console.error('Composition "TrapReel" not found.'); process.exit(1); }
 
   console.log(`Rendering → ${outPath}`);
   await renderMedia({
@@ -59,13 +59,10 @@ async function main() {
     serveUrl: bundleLocation,
     codec: 'h264',
     outputLocation: outPath,
-    inputProps: { script, brand, audioSrc },
+    inputProps,
   });
 
   console.log(`Done: ${outPath}`);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+main().catch((e) => { console.error(e); process.exit(1); });

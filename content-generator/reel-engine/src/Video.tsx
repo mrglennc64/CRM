@@ -14,15 +14,19 @@ export interface VideoProps {
   audioSrc: string;
 }
 
-// Screen timings (fps = 30 set in Root). Total: 20 seconds.
-// Hook 2s · Pain 5s · Example 5s · Fix 4s · CTA 4s
 export const FPS = 30;
 const SECONDS = (s: number) => s * FPS;
+
+function resolveAudio(src: string): string {
+  if (!src) return '';
+  if (src.startsWith('http://') || src.startsWith('https://')) return src;
+  return staticFile(src);
+}
 
 export const TRTrapReel: React.FC<VideoProps> = ({ script, brand, audioSrc }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: brand.palette.bg, fontFamily: 'Inter, sans-serif' }}>
-      <Audio src={audioSrc} />
+      {audioSrc ? <Audio src={resolveAudio(audioSrc)} /> : null}
 
       <Sequence from={0} durationInFrames={SECONDS(2)}>
         <HookScreen text={script.hook} brand={brand} />
