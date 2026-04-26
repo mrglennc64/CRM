@@ -11,30 +11,30 @@ interface Props {
 export function GenerateButtons({ contactId, insights }: Props) {
   const router = useRouter();
   const [insightId, setInsightId] = useState(insights[0]?.id ?? '');
-  const [busy, setBusy] = useState<'content' | 'video' | null>(null);
+  const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
-  async function generate(kind: 'content' | 'video') {
+  async function generate() {
     if (!insightId) {
       setMsg('Pick an insight first.');
       return;
     }
-    setBusy(kind);
+    setBusy(true);
     setMsg(null);
     try {
-      const res = await fetch(`/api/crm/generate-${kind}`, {
+      const res = await fetch('/api/crm/generate-content', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contact_id: contactId, insight_id: insightId }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? 'Failed');
-      setMsg(`${kind === 'content' ? 'Content' : 'Video'} ready.`);
+      setMsg('Script generated. Scroll down → Review & Render Video on the new asset card.');
       router.refresh();
     } catch (e: any) {
       setMsg(`Error: ${e.message}`);
     } finally {
-      setBusy(null);
+      setBusy(false);
     }
   }
 
@@ -53,22 +53,13 @@ export function GenerateButtons({ contactId, insights }: Props) {
         ))}
       </select>
 
-      <div className="flex gap-3">
-        <button
-          onClick={() => generate('content')}
-          disabled={busy !== null}
-          className="flex-1 bg-indigo hover:opacity-90 disabled:opacity-50 px-6 py-3 rounded-lg font-semibold text-white text-sm"
-        >
-          {busy === 'content' ? 'Generating…' : 'Generate Content'}
-        </button>
-        <button
-          onClick={() => generate('video')}
-          disabled={busy !== null}
-          className="flex-1 bg-cyan hover:opacity-90 disabled:opacity-50 text-black px-6 py-3 rounded-lg font-semibold text-sm"
-        >
-          {busy === 'video' ? 'Rendering…' : 'Generate Video'}
-        </button>
-      </div>
+      <button
+        onClick={generate}
+        disabled={busy}
+        className="w-full bg-indigo hover:opacity-90 disabled:opacity-50 px-6 py-3 rounded-lg font-semibold text-white text-sm"
+      >
+        {busy ? 'Generating script…' : 'Generate Content'}
+      </button>
 
       {msg && (
         <div className={`mt-3 text-xs ${msg.startsWith('Error') ? 'text-red-400' : 'text-cyan'}`}>

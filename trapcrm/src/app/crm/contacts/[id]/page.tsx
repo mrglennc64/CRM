@@ -1,6 +1,7 @@
 import { db } from '@/db/client';
 import { listInsights } from '@/lib/content-engine';
 import { GenerateButtons } from '../../components/GenerateButtons';
+import { AssetCardClient } from '../../components/AssetCardClient';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -60,18 +61,21 @@ export default function ContactDetail({ params }: { params: { id: string } }) {
       <section className="mb-8">
         <h2 className="text-lg font-semibold mb-3">Generate</h2>
         <GenerateButtons contactId={contact.id} insights={insights} />
+        <p className="text-xs text-sub mt-2">
+          Generate Content first → then Review &amp; Edit → then Approve &amp; Render Video.
+        </p>
       </section>
 
       <section>
         <h2 className="text-lg font-semibold mb-3">Generated assets</h2>
         {assets.length === 0 ? (
           <div className="text-sub text-sm border border-line rounded-lg p-6 bg-surface">
-            None yet — hit a Generate button above.
+            None yet — hit Generate Content above.
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {assets.map((a) => (
-              <AssetCard key={a.id} asset={a} />
+              <AssetCardClient key={a.id} asset={a} />
             ))}
           </div>
         )}
@@ -85,53 +89,6 @@ function Field({ label, value }: { label: string; value: string }) {
     <div>
       <div className="text-sub uppercase tracking-wider">{label}</div>
       <div className="font-mono break-all">{value}</div>
-    </div>
-  );
-}
-
-function AssetCard({ asset }: { asset: any }) {
-  return (
-    <div className="bg-surface border border-line rounded-lg p-4">
-      <div className="flex justify-between items-start mb-2">
-        <div>
-          <div className="text-xs text-sub uppercase tracking-wider">{asset.type ?? '—'}</div>
-          <div className="text-sm font-semibold">{asset.insight_id ?? '—'}</div>
-        </div>
-        {asset.brand_id && (
-          <span className={`text-[10px] px-2 py-0.5 rounded-full bg-bg border border-line text-b-${asset.brand_id}`}>
-            {asset.brand_id}
-          </span>
-        )}
-      </div>
-
-      <div className="text-xs text-sub mb-3">{asset.created_at}</div>
-
-      {asset.video_path && (
-        <video
-          controls
-          src={`/api/crm/file?p=${encodeURIComponent(asset.video_path)}`}
-          className="w-full rounded mb-2 bg-bg"
-        />
-      )}
-      {asset.audio_path && !asset.video_path && (
-        <audio
-          controls
-          src={`/api/crm/file?p=${encodeURIComponent(asset.audio_path)}`}
-          className="w-full mb-2"
-        />
-      )}
-
-      <div className="flex gap-2 text-xs flex-wrap">
-        {asset.script_path  && <a href={`/api/crm/file?p=${encodeURIComponent(asset.script_path)}`}  className="text-cyan" target="_blank">Script</a>}
-        {asset.caption_path && <a href={`/api/crm/file?p=${encodeURIComponent(asset.caption_path)}`} className="text-cyan" target="_blank">Caption</a>}
-        {asset.audio_path   && <a href={`/api/crm/file?p=${encodeURIComponent(asset.audio_path)}`}   className="text-cyan" target="_blank">Audio</a>}
-        {asset.video_path   && <a href={`/api/crm/file?p=${encodeURIComponent(asset.video_path)}`}   className="text-cyan" target="_blank">Video</a>}
-        {asset.bundle_dir   && <span className="text-sub ml-auto" title={asset.bundle_dir}>📁</span>}
-      </div>
-
-      {asset.error && (
-        <div className="text-red-400 text-xs mt-2">Error: {asset.error}</div>
-      )}
     </div>
   );
 }
