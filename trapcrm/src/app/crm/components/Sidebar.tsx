@@ -6,6 +6,7 @@ const NAV = [
   { href: '/crm/companies', label: 'Companies', icon: '▣' },
   { href: '/crm/deals',     label: 'Deals',     icon: '◆' },
   { href: '/crm/assets',    label: 'Assets',    icon: '⊞' },
+  { href: '/crm/templates', label: 'Templates', icon: '▤' },
 ];
 
 export function Sidebar() {

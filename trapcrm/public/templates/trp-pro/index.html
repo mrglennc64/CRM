@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TrapRoyaltiesPro — 12 Instagram Carousels</title>
+<link rel="stylesheet" href="carousel.css">
+<style>
+  body { padding: 56px 32px 96px; gap: 64px; }
+  .deck { width:100%; max-width: 1200px; display:flex; flex-direction:column; align-items:center; gap:18px; }
+  .deck h1 { color: var(--soft-yellow); font-family: var(--font-display); font-weight:800; font-size:34px; letter-spacing:-0.01em; margin:0; text-align:center; }
+  .deck .meta { font-family: var(--font-body); font-size:13px; text-transform:uppercase; letter-spacing:0.16em; color: rgba(253,230,138,0.55); font-weight:600; }
+  .deck-num {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:64px; height:64px; border-radius:9999px;
+    background: var(--amber); color: var(--cream);
+    font-family: var(--font-display); font-weight:800; font-size:28px;
+    box-shadow: 0 8px 24px -6px rgba(217,119,6,0.6);
+  }
+  .top-banner {
+    width:100%; max-width:1200px;
+    background: linear-gradient(120deg, var(--deep-brown), var(--charcoal));
+    border:1px solid rgba(253,230,138,0.18);
+    border-radius:24px;
+    padding: 36px 40px; color: var(--cream);
+    display:flex; align-items:center; gap:24px;
+    margin-bottom:8px;
+  }
+  .top-banner .lg-name {
+    font-family: var(--font-display); font-weight:800; font-size:28px; letter-spacing:-0.01em;
+  }
+  .top-banner .lg-name .pro { color: var(--gold); }
+  .top-banner .tag {
+    background: rgba(253,230,138,0.12); border:1px solid rgba(253,230,138,0.3);
+    padding: 10px 18px; border-radius:9999px;
+    font-family: var(--font-body); font-weight:600; font-size:11px; letter-spacing:0.14em;
+    text-transform:uppercase; color: var(--soft-yellow);
+  }
+  .top-banner .desc { font-size:14px; color: rgba(253,230,138,0.7); margin-left:auto; max-width:480px; line-height:1.5; }
+</style>
+</head>
+<body>
+
+<div class="top-banner">
+  <div class="lg-name">TrapRoyalties<span class="pro">Pro</span></div>
+  <div class="tag">12 Carousels · 60 Slides</div>
+  <div class="desc">Instagram-ready 1080×1080 posts. Each row is one carousel (slides 1→5). Right-click any slide to save image.</div>
+</div>
+
+<!-- ============================================================ -->
+<!--  Reusable crown SVG -->
+<!-- ============================================================ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="cr" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#D97706"/>
+    </linearGradient>
+    <symbol id="crown" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="30" fill="#1F2937"/>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#D97706" stroke-width="1"/>
+      <circle cx="32" cy="32" r="26" fill="none" stroke="#D97706" stroke-width="0.6" stroke-dasharray="0.5 2"/>
+      <text x="32" y="42" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="800" font-size="28" fill="#FDE68A" letter-spacing="-1">TR</text>
+      <line x1="20" y1="46" x2="44" y2="46" stroke="#D97706" stroke-width="0.8"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- A bit of templating sugar via JS so the file stays maintainable -->
+<script>
+function brand(onCream) {
+  return `<div class="brand"><svg class="crown" viewBox="0 0 64 64"><use href="#crown"/></svg>TrapRoyalties<span class="pro">Pro</span></div>`;
+}
+function foot(num, label) {
+  return `<div class="foot"><span>${label||'@traproyaltiespro'}</span><span class="slide-num">${num}</span></div>`;
+}
+function slide({ bg, mode='', html }) {
+  const cls = `slide ${mode}`;
+  return `<div class="${cls}"><div class="frame ${bg} grain">${html}</div></div>`;
+}
+function deck(num, title, sub, slides) {
+  const row = slides.join('');
+  return `
+  <div class="deck">
+    <div class="meta"><span class="deck-num">${num}</span></div>
+    <h1>${title}</h1>
+    <div class="meta">${sub}</div>
+    <div class="row">${row}</div>
+  </div>`;
+}
+
+// Helpers for slide types
+function S1Headline({bg, mode, eyebrow, headline, hsize='', num}) {
+  return slide({bg, mode, html: `
+    <div class="head">${brand()}<div class="tag">Slide ${num}/5</div></div>
+    <div class="body">
+      <div class="eyebrow">${eyebrow}</div>
+      <h2 class="headline ${hsize}" style="margin-top:32px">${headline}</h2>
+    </div>
+    ${foot(num)}
+  `});
+}
+function SBig({bg, mode, headline, support, hsize='md', num}) {
+  return slide({bg, mode, html: `
+    <div class="head">${brand()}<div class="tag">${num}/5</div></div>
+    <div class="body">
+      <h2 class="headline ${hsize}">${headline}</h2>
+      ${support ? `<p class="support">${support}</p>`:''}
+    </div>
+    ${foot(num)}
+  `});
+}
+function SStat({bg, mode, stat, label, num, sub}) {
+  return slide({bg, mode, html: `
+    <div class="head">${brand()}<div class="tag">${num}/5</div></div>
+    <div class="body" style="justify-content:flex-start; padding-top:40px">
+      <div class="stat-number ${stat.length>5?'sm':''}">${stat}</div>
+      <p class="support" style="margin-top:48px; font-size:36px;">${label}</p>
+      ${sub?`<p class="support" style="font-size:24px; opacity:0.7; margin-top:16px">${sub}</p>`:''}
+    </div>
+    ${foot(num)}
+  `});
+}
+function SList({bg, mode, headline, items, num}) {
+  return slide({bg, mode, html: `
+    <div class="head">${brand()}<div class="tag">${num}/5</div></div>
+    <div class="body">
+      <h2 class="headline xs" style="margin-bottom:48px">${headline}</h2>
+      <ul class="bullet-list">${items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>
+    ${foot(num)}
+  `});
+}
+function SCTA({num}) {
+  return slide({bg:'bg-amber', mode:'on-amber', html: `
+    <div class="head">${brand()}<div class="tag">${num}/5</div></div>
+    <div class="body" style="justify-content:center">
+      <div class="cta-card">
+        <div class="h">Get your<br/>free scan now.</div>
+        <div class="sub">Spotify link or artist name. Results in seconds.</div>
+        <div class="arrow">traproyaltiespro.com<span class="ar">→</span></div>
+      </div>
+    </div>
+    <div class="foot" style="color:rgba(255,251,235,0.85)"><span>@traproyaltiespro</span><span class="slide-num">${num}</span></div>
+  `});
+}
+
+const decks = [];
+
+// 1 — Why You're Losing Royalties
+decks.push(deck(1, 'Why You\u2019re Losing Royalties', 'Awareness · Pain · Diagnosis', [
+  S1Headline({bg:'bg-charcoal', eyebrow:'Royalty leakage', headline:'You\u2019re getting streams\u2026<br/><em>but not getting paid.</em>', num:1}),
+  SStat({bg:'bg-brown', stat:'10–30%', label:'of royalties leak due to metadata gaps.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Most artists don\u2019t even know <em>what\u2019s broken.</em>', hsize:'sm', num:3}),
+  SBig({bg:'bg-brown', headline:'We scan your catalog<br/><em>in seconds.</em>', hsize:'md', num:4}),
+  SCTA({num:5}),
+]));
+
+// 2 — Metadata Mistakes Killing Your Bag
+decks.push(deck(2, 'Metadata Mistakes Killing Your Bag', 'Education · Specifics', [
+  S1Headline({bg:'bg-charcoal', eyebrow:'5 mistakes', headline:'The metadata mistakes <em>costing artists the most.</em>', hsize:'xs', num:1}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'Wrong or missing<br/><em>ISRCs.</em>', hsize:'md', support:'No ISRC = no match. No match = no payout.', num:2}),
+  SBig({bg:'bg-brown', headline:'Missing<br/><em>contributors.</em>', hsize:'md', support:'PROs can\u2019t pay people they don\u2019t know about.', num:3}),
+  SBig({bg:'bg-charcoal', headline:'Wrong<br/><em>splits.</em>', hsize:'md', support:'A 50/50 logged as 60/40 means somebody\u2019s losing.', num:4}),
+  SCTA({num:5}),
+]));
+
+// 3 — What Labels Register
+decks.push(deck(3, 'What Labels Register (and What They Don\u2019t)', 'Myth-busting · Authority', [
+  S1Headline({bg:'bg-charcoal', eyebrow:'Reality check', headline:'Labels register their cut.<br/><em>Who registers yours?</em>', hsize:'sm', num:1}),
+  SBig({bg:'bg-brown', headline:'If you don\u2019t register your works\u2026<br/><em>you don\u2019t get paid.</em>', hsize:'sm', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Labels aren\u2019t responsible<br/>for <em>your metadata.</em>', hsize:'xs', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'Your catalog needs its own<br/><em>registration strategy.</em>', hsize:'xs', num:4}),
+  SCTA({num:5}),
+]));
+
+// 4 — $2,000 Case Study
+decks.push(deck(4, 'The $2,000 Missing Royalty Case Study', 'Proof · Story', [
+  SStat({bg:'bg-charcoal', stat:'$2,000', label:'12 tracks. Royalties left on the table.', num:1, sub:'Independent artist · 2024 case'}),
+  SBig({bg:'bg-brown', headline:'Unmatched ISRCs<br/><em>across DSPs.</em>', hsize:'sm', support:'Same song. Different code on every platform.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Metadata gaps =<br/><em>lost money.</em>', hsize:'md', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'We fixed it.<br/><em>The money flowed.</em>', hsize:'md', num:4}),
+  SCTA({num:5}),
+]));
+
+// 5 — Healthy Catalog
+decks.push(deck(5, 'What a Healthy Catalog Looks Like', 'Aspirational · Definition', [
+  S1Headline({bg:'bg-cream', mode:'on-cream', eyebrow:'Submission ready', headline:'A clean catalog =<br/><em>a paid catalog.</em>', hsize:'sm', num:1}),
+  SBig({bg:'bg-brown', headline:'Correct<br/><em>ISRCs.</em>', hsize:'md', support:'One song. One code. Everywhere.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Verified<br/><em>contributors.</em>', hsize:'md', support:'Names, IPIs, and roles \u2014 confirmed.', num:3}),
+  SBig({bg:'bg-brown', headline:'Aligned<br/><em>splits.</em>', hsize:'md', support:'Every percentage point accounted for.', num:4}),
+  SCTA({num:5}),
+]));
+
+// 6 — Publishers Love Clean Metadata
+decks.push(deck(6, 'Why Publishers Love Clean Metadata', 'B2B · Operational', [
+  S1Headline({bg:'bg-charcoal', eyebrow:'For publishers', headline:'Publishers want <em>compliance,</em><br/>not chaos.', hsize:'xs', num:1}),
+  SBig({bg:'bg-brown', headline:'Clean metadata =<br/><em>faster ingestion.</em>', hsize:'sm', support:'Days, not weeks. No back-and-forth.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Clean metadata =<br/><em>fewer rejections.</em>', hsize:'sm', support:'Submission-ready CWR. First time.', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'Clean metadata =<br/><em>more royalties.</em>', hsize:'sm', num:4}),
+  SCTA({num:5}),
+]));
+
+// 7 — Cost of Bad Metadata
+decks.push(deck(7, 'The Real Cost of Bad Metadata', 'Pain · Stack', [
+  S1Headline({bg:'bg-charcoal', eyebrow:'The hidden tax', headline:'Bad metadata is<br/><em>expensive.</em>', hsize:'md', num:1}),
+  SBig({bg:'bg-brown', headline:'Lost<br/><em>royalties.</em>', hsize:'md', support:'Every quarter. Compounding.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Rejected<br/><em>submissions.</em>', hsize:'md', support:'Sent back. Re-keyed. Sent again.', num:3}),
+  SBig({bg:'bg-brown', headline:'Delayed<br/><em>payments.</em>', hsize:'md', support:'Months in limbo. Sometimes years.', num:4}),
+  SCTA({num:5}),
+]));
+
+// 8 — DIY Artists
+decks.push(deck(8, 'DIY Artists: Why You Need Metadata Help', 'Empathy · Permission', [
+  S1Headline({bg:'bg-cream', mode:'on-cream', eyebrow:'No tech required', headline:'You don\u2019t need to be<br/><em>technical.</em>', hsize:'md', num:1}),
+  SBig({bg:'bg-brown', headline:'Metadata is<br/><em>confusing.</em>', hsize:'md', support:'ISRC, ISWC, IPI, CWR \u2014 we know.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'You shouldn\u2019t have to<br/>learn <em>publishing.</em>', hsize:'xs', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'We fix everything<br/><em>for you.</em>', hsize:'md', num:4}),
+  SCTA({num:5}),
+]));
+
+// 9 — Submission-ready Checklist
+decks.push(deck(9, 'Submission-Ready Catalog Checklist', 'Practical · Checklist', [
+  S1Headline({bg:'bg-charcoal', eyebrow:'Quick check', headline:'Is your catalog<br/><em>submission-ready?</em>', hsize:'sm', num:1}),
+  SBig({bg:'bg-brown', headline:'ISRC + ISWC<br/><em>alignment.</em>', hsize:'sm', support:'Recording and composition codes match.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Contributor<br/><em>verification.</em>', hsize:'sm', support:'Every writer, every producer, every IPI.', num:3}),
+  SBig({bg:'bg-brown', headline:'Split<br/><em>accuracy.</em>', hsize:'md', support:'Sums to 100. Signed off. No drift.', num:4}),
+  SCTA({num:5}),
+]));
+
+// 10 — Why PROs Reject Works
+decks.push(deck(10, 'Why PROs Reject Your Works', 'Diagnostic · Reframe', [
+  S1Headline({bg:'bg-charcoal', eyebrow:'Reframe', headline:'PROs don\u2019t hate you.<br/>Your <em>metadata is broken.</em>', hsize:'xs', num:1}),
+  SBig({bg:'bg-brown', headline:'Missing<br/><em>contributors.</em>', hsize:'md', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Wrong<br/><em>splits.</em>', hsize:'md', num:3}),
+  SBig({bg:'bg-brown', headline:'Conflicting<br/><em>registrations.</em>', hsize:'sm', num:4}),
+  SCTA({num:5}),
+]));
+
+// 11 — Dry Cleaning
+decks.push(deck(11, 'The Metadata Dry-Cleaning Service', 'Positioning · Service', [
+  S1Headline({bg:'bg-charcoal', eyebrow:'The pitch', headline:'You don\u2019t fix metadata.<br/><em>We fix it for you.</em>', hsize:'xs', num:1}),
+  SBig({bg:'bg-brown', headline:'Full<br/><em>cleaning service.</em>', hsize:'md', support:'Done-for-you. Not another dashboard.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Submission-ready<br/><em>exports.</em>', hsize:'sm', support:'CWR files, ready to ship.', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'Professional<br/><em>audit.</em>', hsize:'md', support:'Forensic chain-of-title verification.', num:4}),
+  SCTA({num:5}),
+]));
+
+// 12 — Guarantee
+decks.push(deck(12, 'The Guarantee', 'Trust · Risk reversal', [
+  S1Headline({bg:'bg-charcoal', eyebrow:'No risk', headline:'If we don\u2019t deliver\u2026<br/><em>you don\u2019t pay.</em>', hsize:'sm', num:1}),
+  SBig({bg:'bg-brown', headline:'No<br/><em>subscriptions.</em>', hsize:'lg', num:2}),
+  SBig({bg:'bg-charcoal', headline:'No<br/><em>fine print.</em>', hsize:'lg', num:3}),
+  SBig({bg:'bg-brown', headline:'No tools<br/><em>to learn.</em>', hsize:'lg', num:4}),
+  SCTA({num:5}),
+]));
+
+document.body.insertAdjacentHTML('beforeend', decks.join(''));
+</script>
+
+</body>
+</html>
