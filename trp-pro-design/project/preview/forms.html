@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:24px; background:var(--cream); display:flex; flex-direction:column; gap:14px; }
+  .field { display:flex; flex-direction:column; gap:6px; max-width:520px; }
+  label { font-family:var(--font-body); font-weight:600; font-size:12px; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.08em; }
+  .input { font-family:var(--font-body); font-size:15px; padding:14px 16px; background:#fff; border:1.5px solid var(--border-strong); border-radius:8px; color:var(--charcoal); outline:0; transition:all 160ms; }
+  .input:focus { border-color:var(--amber); box-shadow:0 0 0 4px rgba(217,119,6,0.15); }
+  .group { display:flex; gap:8px; }
+  .group .input { flex:1; }
+  .submit { font-family:var(--font-body); font-weight:600; font-size:14px; background:var(--amber); color:var(--cream); border:0; border-radius:8px; padding:0 22px; cursor:pointer; }
+  .help { font-family:var(--font-body); font-size:12px; color:var(--fg3); }
+</style></head>
+<body>
+  <div class="field">
+    <label>Spotify artist link</label>
+    <div class="group">
+      <input class="input" placeholder="https://open.spotify.com/artist/..." />
+      <button class="submit">Scan</button>
+    </div>
+    <div class="help">We'll cross‑reference your catalog across DSPs and PROs.</div>
+  </div>
+  <div class="field">
+    <label>Email</label>
+    <input class="input" placeholder="you@label.com" />
+  </div>
+</body></html>

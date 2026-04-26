@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:24px; background:var(--cream); }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+  .pair { display:flex; align-items:center; gap:12px; padding:12px; background:#fff; border:1px solid var(--border); border-radius:10px; }
+  .dot { width:32px; height:32px; border-radius:8px; flex:none; box-shadow:var(--shadow-sm); }
+  .meta { font-family:var(--font-body); font-size:12px; color:var(--fg1); }
+  .meta b { font-size:13px; }
+  .meta span { display:block; font-family:var(--font-mono); font-size:10px; color:var(--fg3); margin-top:2px; }
+</style></head>
+<body>
+  <div class="grid">
+    <div class="pair"><div class="dot" style="background:#D97706"></div><div class="meta"><b>Accent</b><span>--accent · CTAs, links</span></div></div>
+    <div class="pair"><div class="dot" style="background:#F59E0B"></div><div class="meta"><b>Accent Hover</b><span>--accent-hover</span></div></div>
+    <div class="pair"><div class="dot" style="background:#D97706"></div><div class="meta"><b>Money</b><span>--money · $ figures</span></div></div>
+    <div class="pair"><div class="dot" style="background:#15803D"></div><div class="meta"><b>Success</b><span>--success</span></div></div>
+    <div class="pair"><div class="dot" style="background:#F59E0B"></div><div class="meta"><b>Warning</b><span>--warning</span></div></div>
+    <div class="pair"><div class="dot" style="background:#B91C1C"></div><div class="meta"><b>Danger</b><span>--danger</span></div></div>
+  </div>
+</body></html>

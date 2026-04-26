@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeyRoya Brand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-neutral-0);
+      padding: var(--space-12);
+      color: var(--color-neutral-900);
+      line-height: var(--leading-normal);
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-neutral-950);
+      margin-bottom: var(--space-2);
+    }
+    .subtitle {
+      font-size: var(--text-lg);
+      color: var(--color-neutral-600);
+      margin-bottom: var(--space-12);
+    }
+    .section {
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      margin-bottom: var(--space-6);
+      border: 1px solid var(--color-neutral-100);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      margin-bottom: var(--space-6);
+      color: var(--color-neutral-900);
+    }
+    .logo-showcase {
+      display: flex;
+      gap: var(--space-8);
+      align-items: center;
+      padding: var(--space-8);
+      background: var(--color-neutral-50);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-6);
+    }
+    .logo-variant {
+      flex: 1;
+    }
+    .logo-variant img {
+      max-width: 100%;
+      height: auto;
+    }
+    .usage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+    .usage-item {
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+    }
+    .usage-do {
+      background: oklch(0.96 0.02 150 / 0.3);
+      border-left: 3px solid var(--color-success-500);
+    }
+    .usage-dont {
+      background: oklch(0.96 0.02 20 / 0.3);
+      border-left: 3px solid var(--color-error-500);
+    }
+    .usage-label {
+      font-weight: var(--weight-semibold);
+      margin-bottom: var(--space-2);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .color-strip {
+      display: flex;
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+    }
+    .color-swatch {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-neutral-200);
+    }
+    .tagline {
+      font-size: var(--text-sm);
+      color: var(--color-neutral-600);
+      margin-top: var(--space-6);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-neutral-100);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Brand Assets</h1>
+    <div class="subtitle">Logo, wordmark, and visual identity</div>
+
+    <div class="section">
+      <div class="section-title">Primary Logo</div>
+      <div class="logo-showcase">
+        <div class="logo-variant">
+          <img src="assets/logo.svg" alt="HeyRoya Logo">
+        </div>
+      </div>
+      <div class="logo-showcase" style="background: var(--color-primary-900);">
+        <div class="logo-variant">
+          <svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="34" font-family="Work Sans, sans-serif" font-size="32" font-weight="700" fill="white" letter-spacing="-0.02em">HeyRoya</text>
+            <path d="M162 14 L168 20 L178 10" stroke="#FFA940" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="170" cy="15" r="14" stroke="#FFA940" stroke-width="2" fill="none" opacity="0.3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Logomark</div>
+      <div class="logo-showcase">
+        <div class="logo-variant" style="max-width: 80px;">
+          <img src="assets/logomark.svg" alt="HeyRoya Logomark">
+        </div>
+      </div>
+      <p style="font-size: var(--text-sm); color: var(--color-neutral-600); margin-top: var(--space-4);">
+        Use the checkmark logomark for social media avatars, favicons, and compact placements.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Brand Colors</div>
+      <div class="color-strip">
+        <div class="color-swatch" style="background: var(--color-primary-600);" title="Primary Blue"></div>
+        <div class="color-swatch" style="background: var(--color-accent-500);" title="Accent Amber"></div>
+        <div class="color-swatch" style="background: var(--color-neutral-900);" title="Charcoal"></div>
+        <div class="color-swatch" style="background: var(--color-success-500);" title="Success Green"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Usage Guidelines</div>
+      <div class="usage-grid">
+        <div class="usage-item usage-do">
+          <div class="usage-label">✓ Do</div>
+          Use ample clear space around logo
+        </div>
+        <div class="usage-item usage-dont">
+          <div class="usage-label">✗ Don't</div>
+          Distort, rotate, or alter proportions
+        </div>
+        <div class="usage-item usage-do">
+          <div class="usage-label">✓ Do</div>
+          Use white logo on dark backgrounds
+        </div>
+        <div class="usage-item usage-dont">
+          <div class="usage-label">✗ Don't</div>
+          Place on busy or low-contrast backgrounds
+        </div>
+      </div>
+    </div>
+
+    <div class="tagline">
+      <strong>Tagline:</strong> Metadata Compliance for Nordic Publishers<br>
+      <strong>Positioning:</strong> A professional service for validating splits, contributors, and registrations before submission to STIM, ICE, and rights organizations.
+    </div>
+  </div>
+</body>
+</html>

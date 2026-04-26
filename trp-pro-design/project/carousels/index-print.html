@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TrapRoyaltiesPro — Carousels (Print)</title>
+<link rel="stylesheet" href="carousel.css">
+<style>
+  @page { size: 1080px 1080px; margin: 0; }
+
+  html, body {
+    background: #1F2937;
+    margin: 0; padding: 0;
+  }
+
+  /* Hide all the on-screen chrome (banner, deck headers, gaps) */
+  .top-banner, .deck > .meta, .deck h1 { display: none !important; }
+  body { padding: 0 !important; gap: 0 !important; }
+  .deck { gap: 0 !important; max-width: none !important; margin: 0 !important; }
+  .row { gap: 0 !important; flex-wrap: nowrap !important; flex-direction: column !important; align-items: stretch !important; }
+
+  /* Each slide becomes a full 1080x1080 page */
+  .slide {
+    width: 1080px !important;
+    height: 1080px !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    page-break-after: always;
+    break-after: page;
+    margin: 0 !important;
+  }
+  .slide .frame {
+    transform: none !important;
+    width: 1080px !important;
+    height: 1080px !important;
+    position: relative !important;
+  }
+
+  /* Force background colors / gradients to print */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  @media print {
+    .top-banner, .deck > .meta, .deck h1 { display: none !important; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="cr" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#D97706"/>
+    </linearGradient>
+    <symbol id="crown" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="30" fill="#1F2937"/>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#D97706" stroke-width="1"/>
+      <circle cx="32" cy="32" r="26" fill="none" stroke="#D97706" stroke-width="0.6" stroke-dasharray="0.5 2"/>
+      <text x="32" y="42" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="800" font-size="28" fill="#FDE68A" letter-spacing="-1">TR</text>
+      <line x1="20" y1="46" x2="44" y2="46" stroke="#D97706" stroke-width="0.8"/>
+    </symbol>
+  </defs>
+</svg>
+
+<script>
+function brand() {
+  return `<div class="brand"><svg class="crown" viewBox="0 0 64 64"><use href="#crown"/></svg>TrapRoyalties<span class="pro">Pro</span></div>`;
+}
+function foot(num, label) {
+  return `<div class="foot"><span>${label||'@traproyaltiespro'}</span><span class="slide-num">${num}</span></div>`;
+}
+function slide({ bg, mode='', html }) {
+  const cls = `slide ${mode}`;
+  return `<div class="${cls}"><div class="frame ${bg} grain">${html}</div></div>`;
+}
+function deck(num, title, sub, slides) {
+  return `<div class="deck"><div class="row">${slides.join('')}</div></div>`;
+}
+
+function S1Headline({bg, mode, eyebrow, headline, hsize='', num}) {
+  return slide({bg, mode, html: `
+    <div class="head">${brand()}<div class="tag">Slide ${num}/5</div></div>
+    <div class="body">
+      <div class="eyebrow">${eyebrow}</div>
+      <h2 class="headline ${hsize}" style="margin-top:32px">${headline}</h2>
+    </div>
+    ${foot(num)}
+  `});
+}
+function SBig({bg, mode, headline, support, hsize='md', num}) {
+  return slide({bg, mode, html: `
+    <div class="head">${brand()}<div class="tag">${num}/5</div></div>
+    <div class="body">
+      <h2 class="headline ${hsize}">${headline}</h2>
+      ${support ? `<p class="support">${support}</p>`:''}
+    </div>
+    ${foot(num)}
+  `});
+}
+function SStat({bg, mode, stat, label, num, sub}) {
+  return slide({bg, mode, html: `
+    <div class="head">${brand()}<div class="tag">${num}/5</div></div>
+    <div class="body" style="justify-content:flex-start; padding-top:40px">
+      <div class="stat-number ${stat.length>5?'sm':''}">${stat}</div>
+      <p class="support" style="margin-top:48px; font-size:36px;">${label}</p>
+      ${sub?`<p class="support" style="font-size:24px; opacity:0.7; margin-top:16px">${sub}</p>`:''}
+    </div>
+    ${foot(num)}
+  `});
+}
+function SCTA({num}) {
+  return slide({bg:'bg-amber', mode:'on-amber', html: `
+    <div class="head">${brand()}<div class="tag">${num}/5</div></div>
+    <div class="body" style="justify-content:center">
+      <div class="cta-card">
+        <div class="h">Get your<br/>free scan now.</div>
+        <div class="sub">Spotify link or artist name. Results in seconds.</div>
+        <div class="arrow">traproyaltiespro.com<span class="ar">→</span></div>
+      </div>
+    </div>
+    <div class="foot" style="color:rgba(255,251,235,0.85)"><span>@traproyaltiespro</span><span class="slide-num">${num}</span></div>
+  `});
+}
+
+const decks = [];
+
+decks.push(deck(1,'','',[
+  S1Headline({bg:'bg-charcoal', eyebrow:'Royalty leakage', headline:'You\u2019re getting streams\u2026<br/><em>but not getting paid.</em>', num:1}),
+  SStat({bg:'bg-brown', stat:'10–30%', label:'of royalties leak due to metadata gaps.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Most artists don\u2019t even know <em>what\u2019s broken.</em>', hsize:'sm', num:3}),
+  SBig({bg:'bg-brown', headline:'We scan your catalog<br/><em>in seconds.</em>', hsize:'md', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(2,'','',[
+  S1Headline({bg:'bg-charcoal', eyebrow:'5 mistakes', headline:'The metadata mistakes <em>costing artists the most.</em>', hsize:'xs', num:1}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'Wrong or missing<br/><em>ISRCs.</em>', hsize:'md', support:'No ISRC = no match. No match = no payout.', num:2}),
+  SBig({bg:'bg-brown', headline:'Missing<br/><em>contributors.</em>', hsize:'md', support:'PROs can\u2019t pay people they don\u2019t know about.', num:3}),
+  SBig({bg:'bg-charcoal', headline:'Wrong<br/><em>splits.</em>', hsize:'md', support:'A 50/50 logged as 60/40 means somebody\u2019s losing.', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(3,'','',[
+  S1Headline({bg:'bg-charcoal', eyebrow:'Reality check', headline:'Labels register their cut.<br/><em>Who registers yours?</em>', hsize:'sm', num:1}),
+  SBig({bg:'bg-brown', headline:'If you don\u2019t register your works\u2026<br/><em>you don\u2019t get paid.</em>', hsize:'sm', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Labels aren\u2019t responsible<br/>for <em>your metadata.</em>', hsize:'xs', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'Your catalog needs its own<br/><em>registration strategy.</em>', hsize:'xs', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(4,'','',[
+  SStat({bg:'bg-charcoal', stat:'$2,000', label:'12 tracks. Royalties left on the table.', num:1, sub:'Independent artist · 2024 case'}),
+  SBig({bg:'bg-brown', headline:'Unmatched ISRCs<br/><em>across DSPs.</em>', hsize:'sm', support:'Same song. Different code on every platform.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Metadata gaps =<br/><em>lost money.</em>', hsize:'md', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'We fixed it.<br/><em>The money flowed.</em>', hsize:'md', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(5,'','',[
+  S1Headline({bg:'bg-cream', mode:'on-cream', eyebrow:'Submission ready', headline:'A clean catalog =<br/><em>a paid catalog.</em>', hsize:'sm', num:1}),
+  SBig({bg:'bg-brown', headline:'Correct<br/><em>ISRCs.</em>', hsize:'md', support:'One song. One code. Everywhere.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Verified<br/><em>contributors.</em>', hsize:'md', support:'Names, IPIs, and roles \u2014 confirmed.', num:3}),
+  SBig({bg:'bg-brown', headline:'Aligned<br/><em>splits.</em>', hsize:'md', support:'Every percentage point accounted for.', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(6,'','',[
+  S1Headline({bg:'bg-charcoal', eyebrow:'For publishers', headline:'Publishers want <em>compliance,</em><br/>not chaos.', hsize:'xs', num:1}),
+  SBig({bg:'bg-brown', headline:'Clean metadata =<br/><em>faster ingestion.</em>', hsize:'sm', support:'Days, not weeks. No back-and-forth.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Clean metadata =<br/><em>fewer rejections.</em>', hsize:'sm', support:'Submission-ready CWR. First time.', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'Clean metadata =<br/><em>more royalties.</em>', hsize:'sm', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(7,'','',[
+  S1Headline({bg:'bg-charcoal', eyebrow:'The hidden tax', headline:'Bad metadata is<br/><em>expensive.</em>', hsize:'md', num:1}),
+  SBig({bg:'bg-brown', headline:'Lost<br/><em>royalties.</em>', hsize:'md', support:'Every quarter. Compounding.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Rejected<br/><em>submissions.</em>', hsize:'md', support:'Sent back. Re-keyed. Sent again.', num:3}),
+  SBig({bg:'bg-brown', headline:'Delayed<br/><em>payments.</em>', hsize:'md', support:'Months in limbo. Sometimes years.', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(8,'','',[
+  S1Headline({bg:'bg-cream', mode:'on-cream', eyebrow:'No tech required', headline:'You don\u2019t need to be<br/><em>technical.</em>', hsize:'md', num:1}),
+  SBig({bg:'bg-brown', headline:'Metadata is<br/><em>confusing.</em>', hsize:'md', support:'ISRC, ISWC, IPI, CWR \u2014 we know.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'You shouldn\u2019t have to<br/>learn <em>publishing.</em>', hsize:'xs', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'We fix everything<br/><em>for you.</em>', hsize:'md', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(9,'','',[
+  S1Headline({bg:'bg-charcoal', eyebrow:'Quick check', headline:'Is your catalog<br/><em>submission-ready?</em>', hsize:'sm', num:1}),
+  SBig({bg:'bg-brown', headline:'ISRC + ISWC<br/><em>alignment.</em>', hsize:'sm', support:'Recording and composition codes match.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Contributor<br/><em>verification.</em>', hsize:'sm', support:'Every writer, every producer, every IPI.', num:3}),
+  SBig({bg:'bg-brown', headline:'Split<br/><em>accuracy.</em>', hsize:'md', support:'Sums to 100. Signed off. No drift.', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(10,'','',[
+  S1Headline({bg:'bg-charcoal', eyebrow:'Reframe', headline:'PROs don\u2019t hate you.<br/>Your <em>metadata is broken.</em>', hsize:'xs', num:1}),
+  SBig({bg:'bg-brown', headline:'Missing<br/><em>contributors.</em>', hsize:'md', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Wrong<br/><em>splits.</em>', hsize:'md', num:3}),
+  SBig({bg:'bg-brown', headline:'Conflicting<br/><em>registrations.</em>', hsize:'sm', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(11,'','',[
+  S1Headline({bg:'bg-charcoal', eyebrow:'The pitch', headline:'You don\u2019t fix metadata.<br/><em>We fix it for you.</em>', hsize:'xs', num:1}),
+  SBig({bg:'bg-brown', headline:'Full<br/><em>cleaning service.</em>', hsize:'md', support:'Done-for-you. Not another dashboard.', num:2}),
+  SBig({bg:'bg-charcoal', headline:'Submission-ready<br/><em>exports.</em>', hsize:'sm', support:'CWR files, ready to ship.', num:3}),
+  SBig({bg:'bg-amber', mode:'on-amber', headline:'Professional<br/><em>audit.</em>', hsize:'md', support:'Forensic chain-of-title verification.', num:4}),
+  SCTA({num:5}),
+]));
+decks.push(deck(12,'','',[
+  S1Headline({bg:'bg-charcoal', eyebrow:'No risk', headline:'If we don\u2019t deliver\u2026<br/><em>you don\u2019t pay.</em>', hsize:'sm', num:1}),
+  SBig({bg:'bg-brown', headline:'No<br/><em>subscriptions.</em>', hsize:'lg', num:2}),
+  SBig({bg:'bg-charcoal', headline:'No<br/><em>fine print.</em>', hsize:'lg', num:3}),
+  SBig({bg:'bg-brown', headline:'No tools<br/><em>to learn.</em>', hsize:'lg', num:4}),
+  SCTA({num:5}),
+]));
+
+document.body.insertAdjacentHTML('beforeend', decks.join(''));
+
+// Auto-print after fonts + layout settle
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    setTimeout(() => window.print(), 600);
+  });
+} else {
+  window.addEventListener('load', () => setTimeout(() => window.print(), 800));
+}
+</script>
+
+</body>
+</html>

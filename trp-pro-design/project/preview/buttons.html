@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:24px; background:var(--cream); }
+  .row { display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .btn { font-family:var(--font-body); font-weight:600; font-size:14px; border-radius:12px; padding:14px 22px; cursor:pointer; transition:all 200ms cubic-bezier(.32,.72,0,1); border:0; display:inline-flex; align-items:center; gap:8px; }
+  .primary { background:var(--amber); color:var(--cream); box-shadow: 0 4px 12px -2px rgba(120,53,15,0.25), inset 0 1px 0 rgba(253,230,138,0.25); }
+  .primary:hover { background:var(--gold); transform:translateY(-1px); box-shadow: 0 8px 20px -4px rgba(120,53,15,0.32), inset 0 1px 0 rgba(253,230,138,0.4); }
+  .secondary { background:var(--cream); color:var(--charcoal); border:1.5px solid var(--charcoal); }
+  .secondary:hover { background:var(--charcoal); color:var(--cream); }
+  .ghost { background:transparent; color:var(--amber); padding:14px 18px; }
+  .ghost:hover { background:rgba(217,119,6,0.08); }
+  .pill { background:var(--soft-yellow); color:var(--brown-900); border-radius:9999px; padding:10px 18px; font-size:13px; }
+  .arrow { font-family:var(--font-display); font-weight:700; }
+</style></head>
+<body>
+  <div class="row">
+    <button class="btn primary">Get your free scan <span class="arrow">→</span></button>
+    <button class="btn secondary">Learn more</button>
+    <button class="btn ghost">See pricing</button>
+    <button class="btn pill">Free</button>
+  </div>
+  <div style="margin-top:18px; font-family:var(--font-body); font-size:11px; color:var(--fg3); text-transform:uppercase; letter-spacing:0.12em;">
+    Primary · Secondary · Ghost · Pill
+  </div>
+</body></html>

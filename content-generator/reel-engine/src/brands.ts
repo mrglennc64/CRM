@@ -39,11 +39,11 @@ export const BRANDS: Record<string, Brand> = {
     url: 'traproyaltiespro.com',
     audience: 'publisher',
     voice: 'forensic',
-    cta: 'Get your free Metadata Health Audit — traproyaltiespro.com',
+    cta: 'Run a free catalog scan — traproyaltiespro.com',
     mode: 'dark',
     palette: {
-      bg: '#020617', surface: '#1E293B', ink: '#F1F5F9', ink_muted: '#CBD5E1',
-      accent: '#6366F1', accent2: '#FACC15', alert: '#F43F5E',
+      bg: '#1F2937', surface: '#451A03', ink: '#FFFBEB', ink_muted: '#FDE68A',
+      accent: '#D97706', accent2: '#F59E0B', alert: '#B91C1C',
     },
   },
   'verseiq': {

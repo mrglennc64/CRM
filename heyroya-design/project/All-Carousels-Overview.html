@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeyRoya — All 12 Instagram Carousels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-neutral-0);
+      padding: var(--space-12);
+      color: var(--color-neutral-900);
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      font-weight: var(--weight-bold);
+      margin-bottom: var(--space-4);
+      color: var(--color-neutral-950);
+    }
+    .subtitle {
+      font-size: var(--text-xl);
+      color: var(--color-neutral-600);
+      margin-bottom: var(--space-16);
+    }
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: var(--space-8);
+    }
+    .carousel-card {
+      background: white;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      transition: all var(--transition-base);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .carousel-card:hover {
+      border-color: var(--color-primary-400);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+    .carousel-number {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-neutral-500);
+      margin-bottom: var(--space-2);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .carousel-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-semibold);
+      margin-bottom: var(--space-3);
+      color: var(--color-neutral-950);
+    }
+    .carousel-desc {
+      font-size: var(--text-sm);
+      color: var(--color-neutral-600);
+      line-height: var(--leading-relaxed);
+    }
+    .stats {
+      background: var(--color-primary-50);
+      padding: var(--space-8);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-16);
+      text-align: center;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-primary-700);
+      margin-bottom: var(--space-2);
+    }
+    .stat-label {
+      font-size: var(--text-sm);
+      color: var(--color-neutral-700);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>HeyRoya Instagram Carousels</h1>
+    <p class="subtitle">12 professional carousel sets • 60 slides total • 1080×1080px • Nordic design aesthetic</p>
+
+    <div class="stats">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Carousel Sets</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">60</div>
+          <div class="stat-label">Total Slides</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Slides Each</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-grid">
+      <a href="carousels/01-why-metadata-matters.html" class="carousel-card">
+        <div class="carousel-number">Carousel 01</div>
+        <h2 class="carousel-title">Why Metadata Matters</h2>
+        <p class="carousel-desc">Nordic Edition — Explaining the importance of clean metadata for royalty payments and PRO submissions.</p>
+      </a>
+
+      <a href="carousels/02-nordic-pro-workflow.html" class="carousel-card">
+        <div class="carousel-number">Carousel 02</div>
+        <h2 class="carousel-title">Nordic PRO Workflow</h2>
+        <p class="carousel-desc">How STIM, ICE, and global PROs process metadata — and why clean data matters at every step.</p>
+      </a>
+
+      <a href="carousels/03-top-5-errors.html" class="carousel-card">
+        <div class="carousel-number">Carousel 03</div>
+        <h2 class="carousel-title">Top 5 Metadata Errors</h2>
+        <p class="carousel-desc">The most common mistakes in Nordic catalogs: wrong ISRCs, missing IPIs, split discrepancies.</p>
+      </a>
+
+      <a href="carousels/04-case-study.html" class="carousel-card">
+        <div class="carousel-number">Carousel 04</div>
+        <h2 class="carousel-title">Case Study: €47K Recovered</h2>
+        <p class="carousel-desc">Real results from a Nordic publisher — problem, cause, fix, result.</p>
+      </a>
+
+      <a href="carousels/05-what-publishers-need.html" class="carousel-card">
+        <div class="carousel-number">Carousel 05</div>
+        <h2 class="carousel-title">What Publishers Need</h2>
+        <p class="carousel-desc">Not another tool — compliance, accuracy, and speed. HeyRoya delivers all three.</p>
+      </a>
+
+      <a href="carousels/06-ingestion-delays.html" class="carousel-card">
+        <div class="carousel-number">Carousel 06</div>
+        <h2 class="carousel-title">Ingestion Delays Explained</h2>
+        <p class="carousel-desc">Why ingestion takes so long: conflicts, missing info, manual admin work.</p>
+      </a>
+
+      <a href="carousels/07-split-verification.html" class="carousel-card">
+        <div class="carousel-number">Carousel 07</div>
+        <h2 class="carousel-title">Split Verification</h2>
+        <p class="carousel-desc">Nordic PROs require 100% accuracy — no drift, no rounding, no assumptions.</p>
+      </a>
+
+      <a href="carousels/08-chain-of-title.html" class="carousel-card">
+        <div class="carousel-number">Carousel 08</div>
+        <h2 class="carousel-title">Chain‑of‑Title Issues</h2>
+        <p class="carousel-desc">Unclear ownership causes rejections. We audit the entire chain from creation to ingestion.</p>
+      </a>
+
+      <a href="carousels/09-hidden-cost.html" class="carousel-card">
+        <div class="carousel-number">Carousel 09</div>
+        <h2 class="carousel-title">Hidden Cost of Bad Metadata</h2>
+        <p class="carousel-desc">Lost royalties, rejected submissions, delayed payments — fix it before it costs you.</p>
+      </a>
+
+      <a href="carousels/10-no-technical.html" class="carousel-card">
+        <div class="carousel-number">Carousel 10</div>
+        <h2 class="carousel-title">No Technical Knowledge Needed</h2>
+        <p class="carousel-desc">Metadata is complex — you shouldn't have to learn it. We handle everything.</p>
+      </a>
+
+      <a href="carousels/11-submission-checklist.html" class="carousel-card">
+        <div class="carousel-number">Carousel 11</div>
+        <h2 class="carousel-title">Submission‑Ready Checklist</h2>
+        <p class="carousel-desc">ISRC/ISWC alignment, contributor verification, split accuracy — we prepare it for you.</p>
+      </a>
+
+      <a href="carousels/12-heyroya-pitch.html" class="carousel-card">
+        <div class="carousel-number">Carousel 12</div>
+        <h2 class="carousel-title">The HeyRoya Pitch</h2>
+        <p class="carousel-desc">Full cleaning service, submission-ready exports, professional audit — start with a free assessment.</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

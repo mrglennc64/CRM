@@ -1,0 +1,200 @@
+/* ==========================================================================
+   TrapRoyaltiesPro — Design Tokens
+   Warm palette, serif display, neutral body.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---------- Color: brand palette ---------- */
+  --amber:        #D97706;  /* primary brand — CTAs, links, money numbers */
+  --amber-600:    #B45309;
+  --amber-400:    #F97316;
+  --gold:         #F59E0B;  /* secondary highlight, hover states */
+  --gold-300:     #FCD34D;
+  --soft-yellow:  #FDE68A;  /* surfaces, badges on dark */
+  --deep-brown:   #78350F;  /* dark premium surface */
+  --brown-900:    #451A03;  /* deepest brown, near-black warm */
+  --charcoal:     #1F2937;  /* body text, dark base */
+  --charcoal-700: #374151;
+  --cream:        #FFFBEB;  /* light surface — replaces white */
+  --paper:        #FEF3C7;  /* secondary warm light surface */
+
+  /* ---------- Color: semantic ---------- */
+  --bg:            var(--cream);
+  --bg-alt:        var(--paper);
+  --bg-dark:       var(--charcoal);
+  --bg-darker:     var(--brown-900);
+
+  --fg1:           var(--charcoal);          /* primary text */
+  --fg2:           #4B5563;                  /* secondary text */
+  --fg3:           #6B7280;                  /* tertiary, captions */
+  --fg-on-dark:    var(--cream);
+  --fg2-on-dark:   #D6D3D1;
+
+  --accent:        var(--amber);
+  --accent-hover:  var(--gold);
+  --money:         var(--amber);             /* dollar figures, royalties */
+
+  --border:        rgba(217, 119, 6, 0.18);
+  --border-strong: rgba(120, 53, 15, 0.32);
+  --border-on-dark:rgba(253, 230, 138, 0.16);
+
+  --success:       #15803D;
+  --warning:       var(--gold);
+  --danger:        #B91C1C;
+
+  /* ---------- Type: families ---------- */
+  --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---------- Type: scale ---------- */
+  --fs-xs:    12px;
+  --fs-sm:    14px;
+  --fs-base:  16px;
+  --fs-md:    18px;
+  --fs-lg:    20px;
+  --fs-xl:    24px;
+  --fs-2xl:   32px;
+  --fs-3xl:   44px;
+  --fs-4xl:   60px;
+  --fs-5xl:   84px;
+  --fs-6xl:   120px;
+
+  /* ---------- Type: tracking ---------- */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-label:  0.12em;  /* uppercase eyebrows */
+
+  /* ---------- Spacing (8px grid) ---------- */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  /* ---------- Radii ---------- */
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   12px;
+  --r-xl:   16px;
+  --r-2xl:  24px;
+  --r-pill: 9999px;
+
+  /* ---------- Shadow (warm, never cool) ---------- */
+  --shadow-sm:  0 1px 2px rgba(120, 53, 15, 0.10);
+  --shadow-md:  0 4px 12px -2px rgba(120, 53, 15, 0.18);
+  --shadow-lg:  0 8px 32px -8px rgba(120, 53, 15, 0.25);
+  --shadow-xl:  0 24px 64px -16px rgba(120, 53, 15, 0.35);
+  --shadow-glow:0 0 0 1px rgba(245, 158, 11, 0.3), 0 0 24px rgba(245, 158, 11, 0.25);
+  --shadow-inset-top: inset 0 1px 0 rgba(253, 230, 138, 0.12);
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast:  160ms;
+  --dur-base:  240ms;
+  --dur-slow:  480ms;
+
+  /* ---------- Layout ---------- */
+  --maxw-prose:   720px;
+  --maxw-content: 1200px;
+  --header-h:     72px;
+}
+
+/* ==========================================================================
+   Semantic element styles (consume tokens)
+   ========================================================================== */
+
+html, body {
+  background: var(--bg);
+  color: var(--fg1);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display headings — Fraunces */
+.h-display, .h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-5xl);
+  line-height: 0.95;
+  letter-spacing: var(--tracking-tight);
+  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+  text-wrap: balance;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-3xl);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+.h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-2xl);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.h4 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  line-height: 1.3;
+}
+
+.eyebrow, .label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--amber);
+}
+
+.p, p {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--fg1);
+}
+
+.lede {
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  color: var(--fg2);
+}
+
+.mono, code, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+.money {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--money);
+  font-variation-settings: 'opsz' 144;
+}
+
+/* Links */
+a {
+  color: var(--amber);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+a:hover { color: var(--gold); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }

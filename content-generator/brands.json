@@ -4,7 +4,7 @@
     "url": "heyroya.se",
     "audience": "publisher",
     "voice": "forensic",
-    "cta": "If you manage a catalog and want a free Metadata Health Audit, I'm happy to run one. → heyroya.se",
+    "cta": "If you manage a catalog and want a free Metadata Health Audit, I'm happy to run one. \u00e2\u2020\u2019 heyroya.se",
     "mode": "dark",
     "palette": {
       "bg": "#0A0A0A",
@@ -21,16 +21,16 @@
     "url": "traproyaltiespro.com",
     "audience": "publisher",
     "voice": "forensic",
-    "cta": "If you manage a catalog and want a free Metadata Health Audit, I'm happy to run one. → traproyaltiespro.com",
+    "cta": "Run a free catalog scan - traproyaltiespro.com",
     "mode": "dark",
     "palette": {
-      "bg": "#020617",
-      "surface": "#1E293B",
-      "ink": "#F1F5F9",
-      "ink_muted": "#CBD5E1",
-      "accent": "#6366F1",
-      "accent2": "#FACC15",
-      "alert": "#F43F5E"
+      "bg": "#1F2937",
+      "surface": "#451A03",
+      "ink": "#FFFBEB",
+      "ink_muted": "#FDE68A",
+      "accent": "#D97706",
+      "accent2": "#F59E0B",
+      "alert": "#B91C1C"
     }
   },
   "verseiq": {
@@ -38,7 +38,7 @@
     "url": "useverseiq.com",
     "audience": "artist",
     "voice": "emotional",
-    "cta": "Get your free catalog scan — link in bio. useverseiq.com",
+    "cta": "Get your free catalog scan \u00e2\u20ac\u201d link in bio. useverseiq.com",
     "mode": "light",
     "palette": {
       "bg": "#FCFEFD",
@@ -55,7 +55,7 @@
     "url": "traproyalties.com",
     "audience": "artist",
     "voice": "emotional",
-    "cta": "Scan your catalog for free — link in bio. traproyalties.com",
+    "cta": "Scan your catalog for free \u00e2\u20ac\u201d link in bio. traproyalties.com",
     "mode": "dark",
     "palette": {
       "bg": "#020818",

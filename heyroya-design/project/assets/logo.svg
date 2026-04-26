@@ -1,0 +1,9 @@
+<svg width="180" height="48" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <text x="0" y="34" font-family="Work Sans, sans-serif" font-size="32" font-weight="700" fill="#0A0E1A" letter-spacing="-0.02em">
+    HeyRoya
+  </text>
+  
+  <path d="M162 14 L168 20 L178 10" stroke="#0066CC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+  <circle cx="170" cy="15" r="14" stroke="#0066CC" stroke-width="2" fill="none" opacity="0.2"></circle>
+</svg>

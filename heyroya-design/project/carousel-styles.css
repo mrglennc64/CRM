@@ -1,0 +1,220 @@
+/* ========================================
+   HeyRoya Instagram Carousel Styles
+   1080×1080px per slide
+   Nordic-clean, warm muted palette
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Nordic Palette — Warm Muted */
+  --nordic-charcoal: #2B3440;
+  --nordic-slate: #495668;
+  --nordic-mist: #7B8A9E;
+  --nordic-pearl: #E8ECEF;
+  --nordic-white: #F8F9FA;
+  
+  --nordic-blue: #5B7D9D;
+  --nordic-blue-light: #8FADC7;
+  --nordic-warm: #B89E8C;
+  --nordic-sand: #D4C4B5;
+  
+  /* Typography */
+  --font-display: 'Work Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: #1a1a1a;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 40px;
+  justify-content: center;
+}
+
+.slide {
+  width: 1080px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 100px;
+  text-align: center;
+}
+
+/* Slide Backgrounds */
+.slide.bg-white {
+  background: var(--nordic-white);
+  color: var(--nordic-charcoal);
+}
+
+.slide.bg-charcoal {
+  background: var(--nordic-charcoal);
+  color: var(--nordic-white);
+}
+
+.slide.bg-pearl {
+  background: var(--nordic-pearl);
+  color: var(--nordic-charcoal);
+}
+
+.slide.bg-blue {
+  background: var(--nordic-blue);
+  color: var(--nordic-white);
+}
+
+.slide.bg-slate {
+  background: var(--nordic-slate);
+  color: var(--nordic-white);
+}
+
+.slide.bg-warm {
+  background: linear-gradient(135deg, var(--nordic-warm) 0%, var(--nordic-sand) 100%);
+  color: var(--nordic-charcoal);
+}
+
+.slide.bg-gradient-blue {
+  background: linear-gradient(135deg, var(--nordic-blue) 0%, var(--nordic-charcoal) 100%);
+  color: var(--nordic-white);
+}
+
+.slide.bg-gradient-mist {
+  background: linear-gradient(135deg, var(--nordic-pearl) 0%, var(--nordic-white) 100%);
+  color: var(--nordic-charcoal);
+}
+
+/* Typography */
+.slide-number {
+  position: absolute;
+  top: 60px;
+  right: 60px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  opacity: 0.4;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: 84px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 40px;
+  letter-spacing: -0.02em;
+  max-width: 880px;
+}
+
+.headline.large {
+  font-size: 96px;
+}
+
+.headline.medium {
+  font-size: 72px;
+}
+
+.supporting {
+  font-family: var(--font-body);
+  font-size: 36px;
+  line-height: 1.5;
+  font-weight: 400;
+  max-width: 780px;
+  opacity: 0.85;
+}
+
+.supporting strong {
+  font-weight: 600;
+  opacity: 1;
+}
+
+/* Accents */
+.accent-bar {
+  width: 120px;
+  height: 6px;
+  background: currentColor;
+  opacity: 0.3;
+  margin-bottom: 60px;
+}
+
+.accent-dot {
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  border-radius: 50%;
+  margin-bottom: 40px;
+}
+
+/* Branding */
+.logo-text {
+  position: absolute;
+  bottom: 60px;
+  left: 60px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.url {
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
+  font-family: var(--font-body);
+  font-size: 28px;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* List Styles */
+.list-number {
+  font-family: var(--font-display);
+  font-size: 120px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 30px;
+  opacity: 0.15;
+}
+
+.content-block {
+  max-width: 780px;
+}
+
+/* Special Layouts */
+.split-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 120px 100px;
+}
+
+.split-layout .headline {
+  margin-bottom: 60px;
+}
+
+.case-study-metric {
+  font-family: var(--font-display);
+  font-size: 120px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 40px;
+  color: var(--nordic-blue-light);
+}
+
+/* Text Highlight */
+.highlight {
+  background: linear-gradient(transparent 60%, currentColor 60%);
+  background-color: transparent;
+  opacity: 0.2;
+  padding: 0 8px;
+}

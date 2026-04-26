@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:24px; background:var(--cream); }
+  .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .badge { font-family:var(--font-body); font-weight:600; font-size:11px; padding:6px 12px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.08em; display:inline-flex; align-items:center; gap:6px; }
+  .b-amber { background:var(--amber); color:var(--cream); }
+  .b-soft  { background:var(--soft-yellow); color:var(--brown-900); }
+  .b-out   { background:transparent; color:var(--amber); border:1.5px solid var(--amber); }
+  .b-dark  { background:var(--charcoal); color:var(--soft-yellow); }
+  .b-success { background:#DCFCE7; color:#15803D; }
+  .b-danger  { background:#FEE2E2; color:#B91C1C; }
+  .dot { width:6px; height:6px; border-radius:9999px; background:currentColor; }
+</style></head>
+<body>
+  <div class="row">
+    <span class="badge b-amber">Free scan</span>
+    <span class="badge b-soft">Recommended</span>
+    <span class="badge b-out">$149 · single work</span>
+    <span class="badge b-dark">Enterprise</span>
+    <span class="badge b-success"><span class="dot"></span>Clean</span>
+    <span class="badge b-danger"><span class="dot"></span>Leakage detected</span>
+  </div>
+</body></html>

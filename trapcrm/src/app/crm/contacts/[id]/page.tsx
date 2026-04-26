@@ -1,7 +1,9 @@
 import { db } from '@/db/client';
 import { listInsights } from '@/lib/content-engine';
+import { stageInfo } from '@/lib/pipeline';
 import { GenerateButtons } from '../../components/GenerateButtons';
 import { AssetCardClient } from '../../components/AssetCardClient';
+import { AddToPipeline } from '../../components/AddToPipeline';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -18,13 +20,15 @@ export default function ContactDetail({ params }: { params: { id: string } }) {
     .prepare('SELECT * FROM generated_assets WHERE contact_id = ? ORDER BY id DESC')
     .all(id) as any[];
 
+  const deals = db()
+    .prepare('SELECT * FROM deals WHERE contact_id = ? ORDER BY updated_at DESC')
+    .all(id) as any[];
+
   const insights = listInsights();
 
   return (
     <div className="p-8 max-w-5xl">
-      <Link href="/crm/contacts" className="text-sub hover:text-cyan text-sm">
-        ← All contacts
-      </Link>
+      <Link href="/crm/contacts" className="text-sub hover:text-cyan text-sm">← All contacts</Link>
 
       <header className="mt-3 mb-6 pb-6 border-b border-line">
         <div className="flex justify-between items-start">
@@ -32,11 +36,7 @@ export default function ContactDetail({ params }: { params: { id: string } }) {
             <h1 className="text-3xl font-bold tracking-tight">{contact.name}</h1>
             <div className="text-sub mt-2 flex gap-4 text-sm">
               <span className="capitalize">{contact.role ?? '—'}</span>
-              {contact.brand_affinity && (
-                <span className={`text-b-${contact.brand_affinity}`}>
-                  • {contact.brand_affinity}
-                </span>
-              )}
+              {contact.brand_affinity && <span className={`text-b-${contact.brand_affinity}`}>• {contact.brand_affinity}</span>}
               {contact.country && <span>• {contact.country}</span>}
               {contact.followers_est && <span>• {contact.followers_est} followers</span>}
               {contact.catalog_size_est && <span>• {contact.catalog_size_est} catalog</span>}
@@ -53,30 +53,41 @@ export default function ContactDetail({ params }: { params: { id: string } }) {
           {contact.distributor && <Field label="Distributor" value={contact.distributor} />}
         </div>
 
-        {contact.notes && (
-          <div className="mt-4 text-sm text-sub border-l-2 border-line pl-3">{contact.notes}</div>
-        )}
+        {contact.notes && <div className="mt-4 text-sm text-sub border-l-2 border-line pl-3">{contact.notes}</div>}
       </header>
+
+      <section className="mb-8">
+        <h2 className="text-lg font-semibold mb-3">Pipeline</h2>
+        {deals.length > 0 && (
+          <div className="mb-3 space-y-2">
+            {deals.map((d) => {
+              const info = stageInfo(d.stage);
+              return (
+                <div key={d.id} className="flex items-center gap-3 bg-surface border border-line rounded-md px-4 py-2 text-sm">
+                  <span className="text-xs uppercase tracking-wider text-cyan">{info.label}</span>
+                  <span className="flex-1 text-ink">{d.title}</span>
+                  <Link href="/crm/deals" className="text-xs text-sub hover:text-cyan">view in pipeline →</Link>
+                </div>
+              );
+            })}
+          </div>
+        )}
+        <AddToPipeline contactId={contact.id} contactName={contact.name} />
+      </section>
 
       <section className="mb-8">
         <h2 className="text-lg font-semibold mb-3">Generate</h2>
         <GenerateButtons contactId={contact.id} insights={insights} />
-        <p className="text-xs text-sub mt-2">
-          Generate Content first → then Review &amp; Edit → then Approve &amp; Render Video.
-        </p>
+        <p className="text-xs text-sub mt-2">Generate Content → Review &amp; Edit → Approve &amp; Render Video.</p>
       </section>
 
       <section>
         <h2 className="text-lg font-semibold mb-3">Generated assets</h2>
         {assets.length === 0 ? (
-          <div className="text-sub text-sm border border-line rounded-lg p-6 bg-surface">
-            None yet — hit Generate Content above.
-          </div>
+          <div className="text-sub text-sm border border-line rounded-lg p-6 bg-surface">None yet.</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {assets.map((a) => (
-              <AssetCardClient key={a.id} asset={a} />
-            ))}
+            {assets.map((a) => <AssetCardClient key={a.id} asset={a} />)}
           </div>
         )}
       </section>

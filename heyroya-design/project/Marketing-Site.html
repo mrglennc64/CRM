@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeyRoya Marketing Site UI Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-neutral-900);
+      color: var(--color-neutral-100);
+      line-height: var(--leading-normal);
+      transition: background var(--transition-base);
+    }
+    
+    body.light-mode {
+      background: var(--color-neutral-0);
+      color: var(--color-neutral-900);
+    }
+    body.light-mode .hero {
+      background: linear-gradient(135deg, var(--color-primary-100) 0%, var(--color-primary-50) 100%);
+      color: var(--color-neutral-950);
+    }
+    body.light-mode .hero-title {
+      background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-primary-600) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    body.light-mode .hero-subtitle {
+      color: var(--color-neutral-700);
+    }
+    body.light-mode .stat-label {
+      color: var(--color-neutral-600);
+    }
+    body.light-mode .cta {
+      background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-800) 100%);
+    }
+    body.light-mode .footer {
+      background: var(--color-neutral-100);
+      color: var(--color-neutral-700);
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-neutral-950) 100%);
+      padding: var(--space-24) var(--space-8);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 50%, oklch(0.55 0.18 240 / 0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      background: oklch(1 0 0 / 0.1);
+      border: 1px solid oklch(1 0 0 / 0.2);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-6);
+      backdrop-filter: blur(10px);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: var(--text-7xl);
+      font-weight: var(--weight-bold);
+      line-height: var(--leading-tight);
+      margin-bottom: var(--space-6);
+      background: linear-gradient(135deg, white 0%, var(--color-primary-200) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: var(--text-2xl);
+      color: var(--color-neutral-300);
+      margin-bottom: var(--space-8);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: var(--leading-relaxed);
+    }
+    .hero-cta {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-12);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-lg);
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      font-weight: var(--weight-semibold);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--color-accent-500);
+      color: var(--color-neutral-950);
+    }
+    .btn-primary:hover {
+      background: var(--color-accent-400);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px oklch(0.64 0.18 60 / 0.3);
+    }
+    .btn-secondary {
+      background: oklch(1 0 0 / 0.1);
+      color: white;
+      border: 1px solid oklch(1 0 0 / 0.3);
+      backdrop-filter: blur(10px);
+    }
+    .btn-secondary:hover {
+      background: oklch(1 0 0 / 0.15);
+      border-color: oklch(1 0 0 / 0.5);
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-6);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .stat {
+      text-align: center;
+      padding: var(--space-4);
+    }
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-accent-400);
+      margin-bottom: var(--space-2);
+    }
+    .stat-label {
+      font-size: var(--text-sm);
+      color: var(--color-neutral-400);
+    }
+    
+    /* Features Section */
+    .features {
+      background: var(--color-neutral-0);
+      padding: var(--space-24) var(--space-8);
+    }
+    .features-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-16);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-neutral-950);
+      margin-bottom: var(--space-4);
+    }
+    .section-subtitle {
+      font-size: var(--text-xl);
+      color: var(--color-neutral-600);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--space-8);
+    }
+    .feature-card {
+      background: white;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      transition: all var(--transition-base);
+    }
+    .feature-card:hover {
+      border-color: var(--color-primary-400);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--color-primary-50);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-4);
+    }
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-semibold);
+      color: var(--color-neutral-950);
+      margin-bottom: var(--space-3);
+    }
+    .feature-desc {
+      color: var(--color-neutral-700);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Process Section */
+    .process {
+      background: var(--color-neutral-50);
+      padding: var(--space-24) var(--space-8);
+    }
+    .process-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-8);
+      position: relative;
+    }
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    .step-number {
+      width: 64px;
+      height: 64px;
+      background: var(--color-primary-600);
+      color: white;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-bold);
+      margin: 0 auto var(--space-4);
+      box-shadow: var(--shadow-md);
+    }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      color: var(--color-neutral-950);
+      margin-bottom: var(--space-2);
+    }
+    .step-desc {
+      color: var(--color-neutral-700);
+      font-size: var(--text-base);
+    }
+    
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(135deg, var(--color-primary-700) 0%, var(--color-primary-900) 100%);
+      padding: var(--space-24) var(--space-8);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 70% 50%, oklch(0.64 0.18 60 / 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      font-weight: var(--weight-bold);
+      color: white;
+      margin-bottom: var(--space-4);
+      line-height: var(--leading-tight);
+    }
+    .cta-subtitle {
+      font-size: var(--text-xl);
+      color: var(--color-primary-100);
+      margin-bottom: var(--space-8);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--color-neutral-950);
+      padding: var(--space-12) var(--space-8);
+      text-align: center;
+      color: var(--color-neutral-400);
+      font-size: var(--text-sm);
+    }
+    .footer a {
+      color: var(--color-accent-400);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div style="font-family: var(--font-display); font-size: var(--text-3xl); font-weight: var(--weight-bold); margin-bottom: var(--space-6); letter-spacing: -0.02em;">
+        HeyRoya
+      </div>
+      
+      <div class="hero-badge">
+        <span style="width: 8px; height: 8px; background: var(--color-success-400); border-radius: 50%; display: inline-block;"></span>
+        Now accepting publishers for 30-day pilot
+      </div>
+      
+      <h1 class="hero-title">Metadata Compliance<br>for Nordic Publishers</h1>
+      
+      <p class="hero-subtitle">
+        A professional service for validating splits, contributors, and registrations before submission to STIM, ICE, and rights organizations.
+      </p>
+      
+      <div class="hero-cta">
+        <a href="#" class="btn btn-secondary">Join Pilot Program</a>
+      </div>
+      
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">87%</div>
+          <div class="stat-label">Fewer rejections</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3.2h</div>
+          <div class="stat-label">Average time saved per batch</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Transparent documentation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="features-container">
+      <div class="section-header">
+        <h2 class="section-title">For Publishers — Pre-Validated Metadata</h2>
+        <p class="section-subtitle">
+          Reduce back-and-forth with STIM and simplify catalog administration
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">✓</div>
+          <h3 class="feature-title">Fewer Rejected Works</h3>
+          <p class="feature-desc">
+            Identify conflicts, missing contributors, and inconsistent identifiers before they reach STIM.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3 class="feature-title">Automatic Pre-Validation</h3>
+          <p class="feature-desc">
+            Checks split integrity, identifiers, roles, and chain-of-title across CWR, DDEX, Excel formats.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📄</div>
+          <h3 class="feature-title">Transparent Documentation</h3>
+          <p class="feature-desc">
+            Full Metadata Health Report with before/after comparison and summary of all corrections.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3 class="feature-title">Clear Chain-of-Title</h3>
+          <p class="feature-desc">
+            Better handling of foreign works with consistent writer and publisher identifiers.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3 class="feature-title">You Stay in Control</h3>
+          <p class="feature-desc">
+            No integration required. No automatic changes. Review and approve every correction.
+          </p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">Fast Setup</h3>
+          <p class="feature-desc">
+            Free 30-day pilot. Upload 20–50 works and receive clean, STIM-ready files in days.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="process">
+    <div class="process-container">
+      <div class="section-header">
+        <h2 class="section-title">How HeyRoya Works</h2>
+        <p class="section-subtitle">Three steps from messy metadata to STIM-ready files</p>
+      </div>
+      
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Upload Once</h3>
+          <p class="step-desc">CWR, DDEX, or Excel — any format. Upload your catalog and let HeyRoya analyze the metadata.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Automatic Pre-Validation</h3>
+          <p class="step-desc">Checks split integrity, identifiers, roles, and chain-of-title. Identifies conflicts before STIM sees them.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Export Clean File</h3>
+          <p class="step-desc">STIM-ready metadata with full documentation of all corrections. Review, approve, submit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-content">
+      <h2 class="cta-title">Ready for a Pilot?</h2>
+      <p class="cta-subtitle">
+        Let's run Roya on a real catalog together.<br>
+        30-minute live demo • Confidential • No commitment
+      </p>
+      <a href="mailto:Ken@heyroya.se" class="btn btn-primary">Contact Ken@heyroya.se</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      Roya — Metadata Cleaning Wizard<br>
+      © 2026 • All Rights Reserved • <a href="mailto:hello@heyroya.se">hello@heyroya.se</a> • Powered by <a href="https://usesmpt.com/" target="_blank">SMPT</a>
+    </p>
+  </footer>
+
+  <div id="tweaks-root"></div>
+
+  <script type="text/babel">
+    const { TweaksPanel, TweakSection, TweakRadio, TweakToggle, TweakColor, TweakSlider, useTweaks } = window;
+
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "heroTitle": "Metadata Compliance<br>for Nordic Publishers",
+      "heroSubtitle": "A professional service for validating splits, contributors, and registrations before submission to STIM, ICE, and rights organizations.",
+      "secondaryCTA": "Join Pilot Program",
+      "accentColor": "#D97706",
+      "primaryColor": "#0066CC",
+      "darkMode": true,
+      "heroGradient": "blue",
+      "featureSectionTitle": "For Publishers — Pre-Validated Metadata"
+    }/*EDITMODE-END*/;
+
+    function HeyRoyaTweaks() {
+      const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+      React.useEffect(() => {
+        // Apply dark/light mode
+        if (tweaks.darkMode) {
+          document.body.classList.remove('light-mode');
+        } else {
+          document.body.classList.add('light-mode');
+        }
+
+        // Apply hero title
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle) heroTitle.innerHTML = tweaks.heroTitle;
+
+        // Apply hero subtitle
+        const heroSubtitle = document.querySelector('.hero-subtitle');
+        if (heroSubtitle) heroSubtitle.textContent = tweaks.heroSubtitle;
+
+        // Apply CTA
+        const secondaryBtn = document.querySelector('.btn-secondary');
+        if (secondaryBtn) secondaryBtn.textContent = tweaks.secondaryCTA;
+
+        // Apply feature section title
+        const featureTitle = document.querySelector('.features .section-title');
+        if (featureTitle) featureTitle.textContent = tweaks.featureSectionTitle;
+
+        // Apply colors
+        document.documentElement.style.setProperty('--color-accent-500', tweaks.accentColor);
+        document.documentElement.style.setProperty('--color-primary-600', tweaks.primaryColor);
+
+        // Apply hero gradient
+        const hero = document.querySelector('.hero');
+        if (hero) {
+          if (tweaks.heroGradient === 'blue') {
+            hero.style.background = 'linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-neutral-950) 100%)';
+          } else if (tweaks.heroGradient === 'amber') {
+            hero.style.background = 'linear-gradient(135deg, var(--color-accent-900) 0%, var(--color-neutral-950) 100%)';
+          } else {
+            hero.style.background = 'linear-gradient(135deg, var(--color-neutral-900) 0%, var(--color-neutral-950) 100%)';
+          }
+        }
+      }, [tweaks]);
+
+      return (
+        <TweaksPanel title="HeyRoya">
+          <TweakSection title="Visual Mode">
+            <TweakToggle
+              label="Dark Mode"
+              checked={tweaks.darkMode}
+              onChange={(val) => setTweak('darkMode', val)}
+            />
+          </TweakSection>
+
+          <TweakSection title="Hero Section">
+            <TweakRadio
+              label="Hero Gradient"
+              value={tweaks.heroGradient}
+              options={[
+                { value: 'blue', label: 'Blue' },
+                { value: 'amber', label: 'Amber' },
+                { value: 'neutral', label: 'Neutral' }
+              ]}
+              onChange={(val) => setTweak('heroGradient', val)}
+            />
+          </TweakSection>
+
+          <TweakSection title="Colors">
+            <TweakColor
+              label="Accent Color"
+              value={tweaks.accentColor}
+              onChange={(val) => setTweak('accentColor', val)}
+            />
+            <TweakColor
+              label="Primary Color"
+              value={tweaks.primaryColor}
+              onChange={(val) => setTweak('primaryColor', val)}
+            />
+          </TweakSection>
+
+          <TweakSection title="Copy Variants">
+            <TweakRadio
+              label="Hero Title"
+              value={tweaks.heroTitle}
+              options={[
+                { value: 'Metadata Compliance<br>for Nordic Publishers', label: 'Nordic Focus' },
+                { value: 'Fix Metadata.<br>Before It Reaches STIM.', label: 'Problem-First' },
+                { value: 'Clean Splits.<br>Every Time.', label: 'Benefit-First' }
+              ]}
+              onChange={(val) => setTweak('heroTitle', val)}
+            />
+            <TweakRadio
+              label="Feature Section Title"
+              value={tweaks.featureSectionTitle}
+              options={[
+                { value: 'For Publishers — Pre-Validated Metadata', label: 'Standard' },
+                { value: 'Why Publishers Choose HeyRoya', label: 'Social Proof' },
+                { value: 'Metadata Compliance Made Simple', label: 'Simplified' }
+              ]}
+              onChange={(val) => setTweak('featureSectionTitle', val)}
+            />
+          </TweakSection>
+        </TweaksPanel>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('tweaks-root'));
+    root.render(<HeyRoyaTweaks />);
+  </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeyRoya Typography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-neutral-0);
+      padding: var(--space-12);
+      color: var(--color-neutral-900);
+    }
+    .container { max-width: 700px; margin: 0 auto; }
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-neutral-950);
+      margin-bottom: var(--space-2);
+    }
+    .subtitle {
+      font-size: var(--text-lg);
+      color: var(--color-neutral-600);
+      margin-bottom: var(--space-12);
+    }
+    .section {
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      margin-bottom: var(--space-6);
+      border: 1px solid var(--color-neutral-100);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      margin-bottom: var(--space-6);
+      color: var(--color-neutral-900);
+    }
+    .font-specimen {
+      margin-bottom: var(--space-8);
+      padding-bottom: var(--space-8);
+      border-bottom: 1px solid var(--color-neutral-100);
+    }
+    .font-specimen:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .font-label {
+      font-size: var(--text-sm);
+      color: var(--color-neutral-600);
+      margin-bottom: var(--space-3);
+      font-family: var(--font-mono);
+    }
+    .type-scale-item {
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--color-neutral-100);
+    }
+    .type-scale-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .type-meta {
+      font-size: var(--text-xs);
+      color: var(--color-neutral-500);
+      font-family: var(--font-mono);
+      margin-top: var(--space-2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Typography</h1>
+    <div class="subtitle">Clean, professional, accessible type system</div>
+
+    <div class="section">
+      <div class="section-title">Font Families</div>
+      
+      <div class="font-specimen">
+        <div class="font-label">Display — Work Sans</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--weight-bold); line-height: var(--leading-tight); margin-bottom: var(--space-2);">
+          Fix Metadata Before STIM
+        </div>
+        <div style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--weight-semibold); color: var(--color-neutral-700);">
+          Pre-validated ownership data
+        </div>
+        <p style="font-size: var(--text-sm); color: var(--color-neutral-600); margin-top: var(--space-3);">
+          Use for headlines, hero text, section titles. Bold geometric sans with technical precision.
+        </p>
+      </div>
+
+      <div class="font-specimen">
+        <div class="font-label">Body — Inter</div>
+        <div style="font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-relaxed); margin-bottom: var(--space-3);">
+          HeyRoya helps publishers pre-validate ownership data, identify conflicts, and prepare STIM-ready metadata before submission — reducing avoidable rejections and manual corrections.
+        </div>
+        <p style="font-size: var(--text-sm); color: var(--color-neutral-600);">
+          Use for body copy, UI text, descriptions. Excellent on-screen readability.
+        </p>
+      </div>
+
+      <div class="font-specimen">
+        <div class="font-label">Mono — JetBrains Mono</div>
+        <div style="font-family: var(--font-mono); font-size: var(--text-sm); line-height: var(--leading-relaxed); background: var(--color-neutral-50); padding: var(--space-4); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+          SE1234567890<br>
+          ISWC T-123.456.789-0<br>
+          CWR 2.2 | DDEX ERN 4.1
+        </div>
+        <p style="font-size: var(--text-sm); color: var(--color-neutral-600);">
+          Use for identifiers, codes, technical data, file formats.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Type Scale</div>
+      
+      <div class="type-scale-item">
+        <div style="font-family: var(--font-display); font-size: var(--text-6xl); font-weight: var(--weight-bold); line-height: var(--leading-tight);">
+          Hero Display
+        </div>
+        <div class="type-meta">text-6xl · 60px · weight-bold · leading-tight</div>
+      </div>
+
+      <div class="type-scale-item">
+        <div style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--weight-bold); line-height: var(--leading-tight);">
+          Page Headline
+        </div>
+        <div class="type-meta">text-4xl · 36px · weight-bold · leading-tight</div>
+      </div>
+
+      <div class="type-scale-item">
+        <div style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--weight-semibold); line-height: var(--leading-snug);">
+          Section Title
+        </div>
+        <div class="type-meta">text-2xl · 24px · weight-semibold · leading-snug</div>
+      </div>
+
+      <div class="type-scale-item">
+        <div style="font-family: var(--font-body); font-size: var(--text-xl); font-weight: var(--weight-medium); line-height: var(--leading-normal);">
+          Subsection Heading
+        </div>
+        <div class="type-meta">text-xl · 20px · weight-medium · leading-normal</div>
+      </div>
+
+      <div class="type-scale-item">
+        <div style="font-family: var(--font-body); font-size: var(--text-base); line-height: var(--leading-relaxed); max-width: 600px;">
+          Body text for descriptions, feature explanations, and longer-form content. Should maintain excellent readability across different screen sizes while keeping a professional, approachable tone.
+        </div>
+        <div class="type-meta">text-base · 16px · weight-normal · leading-relaxed</div>
+      </div>
+
+      <div class="type-scale-item">
+        <div style="font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-neutral-600);">
+          Small text for labels, captions, metadata
+        </div>
+        <div class="type-meta">text-sm · 14px · weight-normal</div>
+      </div>
+
+      <div class="type-scale-item">
+        <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-neutral-600);">
+          TECHNICAL-CODE-12345
+        </div>
+        <div class="type-meta">text-xs · 12px · font-mono</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

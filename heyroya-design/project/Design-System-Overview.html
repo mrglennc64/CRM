@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeyRoya Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    @media print {
+      body { margin: 0; }
+      .page-break { page-break-after: always; }
+      .no-print { display: none; }
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: white;
+      color: var(--color-neutral-900);
+      line-height: var(--leading-normal);
+    }
+    
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-neutral-950) 100%);
+      color: white;
+      text-align: center;
+      padding: var(--space-12);
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, oklch(0.55 0.18 240 / 0.2) 0%, transparent 60%);
+    }
+    .cover-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+    .cover-logo {
+      margin-bottom: var(--space-12);
+    }
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: var(--text-7xl);
+      font-weight: var(--weight-bold);
+      margin-bottom: var(--space-4);
+      line-height: var(--leading-tight);
+    }
+    .cover-subtitle {
+      font-size: var(--text-2xl);
+      color: var(--color-primary-200);
+      margin-bottom: var(--space-12);
+    }
+    .cover-tagline {
+      font-size: var(--text-xl);
+      color: var(--color-neutral-300);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .section {
+      padding: var(--space-16) var(--space-8);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      font-weight: var(--weight-bold);
+      margin-bottom: var(--space-8);
+      color: var(--color-neutral-950);
+    }
+    .section-intro {
+      font-size: var(--text-xl);
+      color: var(--color-neutral-600);
+      margin-bottom: var(--space-12);
+      max-width: 700px;
+    }
+    
+    iframe {
+      width: 100%;
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-8);
+    }
+    
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: var(--space-8);
+    }
+    
+    .footer {
+      background: var(--color-neutral-950);
+      color: var(--color-neutral-400);
+      padding: var(--space-12);
+      text-align: center;
+      font-size: var(--text-sm);
+    }
+    .footer-links {
+      margin-bottom: var(--space-4);
+    }
+    .footer-links a {
+      color: var(--color-accent-400);
+      text-decoration: none;
+      margin: 0 var(--space-3);
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cover -->
+  <div class="cover page-break">
+    <div class="cover-content">
+      <div class="cover-logo">
+        <svg width="240" height="64" viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="34" font-family="Work Sans, sans-serif" font-size="32" font-weight="700" fill="white" letter-spacing="-0.02em">HeyRoya</text>
+          <path d="M162 14 L168 20 L178 10" stroke="#FFA940" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="170" cy="15" r="14" stroke="#FFA940" stroke-width="2" fill="none" opacity="0.3"/>
+        </svg>
+      </div>
+      <h1 class="cover-title">Design System</h1>
+      <p class="cover-subtitle">Metadata Compliance for Nordic Publishers</p>
+      <p class="cover-tagline">
+        A professional service for validating splits, contributors, and registrations before submission to STIM, ICE, and rights organizations
+      </p>
+    </div>
+  </div>
+
+  <!-- Brand -->
+  <div class="section page-break">
+    <h2 class="section-title">Brand Assets</h2>
+    <p class="section-intro">Logo, wordmark, and visual identity guidelines</p>
+    <iframe src="Brand.html" height="900"></iframe>
+  </div>
+
+  <!-- Colors -->
+  <div class="section page-break">
+    <h2 class="section-title">Color System</h2>
+    <p class="section-intro">Trust-forward palette combining cool blues with music industry warmth</p>
+    <iframe src="Colors.html" height="1100"></iframe>
+  </div>
+
+  <!-- Typography -->
+  <div class="section page-break">
+    <h2 class="section-title">Typography</h2>
+    <p class="section-intro">Clean, professional type system for technical precision and readability</p>
+    <iframe src="Typography.html" height="1200"></iframe>
+  </div>
+
+  <!-- Spacing -->
+  <div class="section page-break">
+    <h2 class="section-title">Spacing & Layout</h2>
+    <p class="section-intro">Consistent spacing scale, border radii, and elevation shadows</p>
+    <iframe src="Spacing.html" height="900"></iframe>
+  </div>
+
+  <!-- Components -->
+  <div class="section page-break">
+    <h2 class="section-title">Components</h2>
+    <p class="section-intro">Core UI patterns: buttons, cards, badges, inputs, and feature blocks</p>
+    <iframe src="Components.html" height="1000"></iframe>
+  </div>
+
+  <!-- Marketing Site -->
+  <div class="section page-break">
+    <h2 class="section-title">Marketing Site UI Kit</h2>
+    <p class="section-intro">Complete marketing site with hero, features, process, and CTA sections</p>
+    <iframe src="Marketing-Site.html" height="2400"></iframe>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-links">
+      <a href="mailto:hello@heyroya.se">hello@heyroya.se</a>
+      <a href="mailto:Ken@heyroya.se">Ken@heyroya.se</a>
+      <a href="https://heyroya.se">heyroya.se</a>
+    </div>
+    <p>© 2026 HeyRoya • All Rights Reserved • Metadata Pre-Validation Prototype</p>
+  </div>
+</body>
+</html>
