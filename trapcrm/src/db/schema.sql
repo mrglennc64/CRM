@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS contacts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     email TEXT,
-    role TEXT,                      -- artist | publisher | manager | attorney | a&r
-    brand_affinity TEXT,            -- heyroya | trp-pro | verseiq | traproyalties
+    role TEXT,
+    brand_affinity TEXT,
     instagram TEXT,
     tiktok TEXT,
     spotify TEXT,
@@ -27,8 +27,8 @@ CREATE INDEX IF NOT EXISTS idx_contacts_name ON contacts(name);
 CREATE TABLE IF NOT EXISTS companies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    type TEXT,                      -- label | publisher | distributor | management
-    size TEXT,                      -- 1-10 | 11-50 | 51-200 | 200+
+    type TEXT,
+    size TEXT,
     catalog_size TEXT,
     metadata_maturity_score INTEGER,
     website TEXT,
@@ -46,10 +46,11 @@ CREATE TABLE IF NOT EXISTS deals (
     contact_id INTEGER,
     company_id INTEGER,
     title TEXT NOT NULL,
-    type TEXT,                      -- metadata-cleaning | royalty-recovery | catalog-audit | publishing-admin
-    stage TEXT DEFAULT 'lead',      -- lead | qualified | audit | proposal | closed-won | closed-lost
+    type TEXT,
+    stage TEXT DEFAULT 'lead',
     value_est REAL,
     notes TEXT,
+    history TEXT DEFAULT '[]',
     created_at TEXT DEFAULT (datetime('now')),
     updated_at TEXT DEFAULT (datetime('now')),
     FOREIGN KEY (contact_id) REFERENCES contacts(id),
@@ -57,20 +58,21 @@ CREATE TABLE IF NOT EXISTS deals (
 );
 
 CREATE INDEX IF NOT EXISTS idx_deals_stage ON deals(stage);
+CREATE INDEX IF NOT EXISTS idx_deals_contact ON deals(contact_id);
 
 CREATE TABLE IF NOT EXISTS generated_assets (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     contact_id INTEGER,
     insight_id TEXT,
-    brand_id TEXT,                  -- heyroya | trp-pro | verseiq | traproyalties
-    type TEXT,                      -- tiktok | reel | linkedin | carousel | threads | twitter | video
+    brand_id TEXT,
+    type TEXT,
     script_path TEXT,
     caption_path TEXT,
     audio_path TEXT,
     video_path TEXT,
     thumbnail_path TEXT,
-    bundle_dir TEXT,                -- absolute path to the bundle folder
-    status TEXT DEFAULT 'ready',    -- ready | rendering | failed
+    bundle_dir TEXT,
+    status TEXT DEFAULT 'ready',
     error TEXT,
     created_at TEXT DEFAULT (datetime('now')),
     FOREIGN KEY (contact_id) REFERENCES contacts(id)
@@ -78,3 +80,7 @@ CREATE TABLE IF NOT EXISTS generated_assets (
 
 CREATE INDEX IF NOT EXISTS idx_assets_contact ON generated_assets(contact_id);
 CREATE INDEX IF NOT EXISTS idx_assets_created ON generated_assets(created_at);
+
+-- Migration: add history column if missing (for already-existing DBs).
+-- This is safe to run repeatedly — it errors silently inside the runtime
+-- (the application checks before insert).

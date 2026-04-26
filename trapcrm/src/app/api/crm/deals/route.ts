@@ -1,8 +1,10 @@
 import { db } from '@/db/client';
-import { STAGE_IDS } from '@/lib/pipeline';
+import { STAGE_IDS, StageId } from '@/lib/pipeline';
+import { appendDealEvent, ensureHistoryColumn } from '@/lib/deal-events';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
+  ensureHistoryColumn();
   const { searchParams } = new URL(req.url);
   const stage = searchParams.get('stage');
   const contactId = searchParams.get('contact_id');
@@ -23,10 +25,11 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  ensureHistoryColumn();
   const body = await req.json();
   if (!body.title) return NextResponse.json({ error: 'title required' }, { status: 400 });
 
-  const stage = body.stage && STAGE_IDS.includes(body.stage) ? body.stage : 'lead';
+  const stage: StageId = body.stage && STAGE_IDS.includes(body.stage) ? body.stage : 'lead';
 
   const r = db().prepare(`
     INSERT INTO deals (contact_id, company_id, title, type, stage, value_est, notes)
@@ -41,5 +44,8 @@ export async function POST(req: NextRequest) {
     body.notes ?? null,
   );
 
-  return NextResponse.json({ id: r.lastInsertRowid });
+  const dealId = r.lastInsertRowid as number;
+  appendDealEvent(dealId, { stage, source: 'manual:create', note: 'Deal created' });
+
+  return NextResponse.json({ id: dealId });
 }

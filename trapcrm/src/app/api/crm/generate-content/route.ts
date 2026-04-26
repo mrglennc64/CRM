@@ -1,8 +1,8 @@
 import { db } from '@/db/client';
 import { generateContent } from '@/lib/content-engine';
+import { autoPromoteContactDeals } from '@/lib/deal-events';
 import { NextRequest, NextResponse } from 'next/server';
-import { join, basename } from 'node:path';
-import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -24,21 +24,23 @@ export async function POST(req: NextRequest) {
       weekly: false,
     });
 
-    // Find the brand subfolder inside the bundle
-    const brandFolder = join(result.bundleDir, brand);
     const filesInBrand = result.files.filter((f) => f.startsWith(brand + '/'));
-
-    // Pick the main script (tiktok or linkedin) for the asset row
     const mainText =
       filesInBrand.find((f) => f.includes('tiktok')) ??
       filesInBrand.find((f) => f.includes('linkedin')) ??
       filesInBrand.find((f) => f.endsWith('.txt')) ?? null;
 
     const carouselDir = filesInBrand.find((f) => f.includes('carousel/'));
-    const carouselScript = carouselDir ? carouselDir.split('/').slice(0, 3).join('/') + '/script.txt' : null;
+    const carouselScript  = carouselDir ? carouselDir.split('/').slice(0, 3).join('/') + '/script.txt'  : null;
     const carouselCaption = carouselDir ? carouselDir.split('/').slice(0, 3).join('/') + '/caption.txt' : null;
 
     const fullPath = (rel: string | null) => (rel ? join(result.bundleDir, rel) : null);
+
+    // Detect tiktok script path (could be folder layout: brand/adhoc_tiktok/script.txt)
+    const tiktokScriptInFolder = filesInBrand.find((f) => f.includes('tiktok/script.txt'));
+    const tiktokScriptPath = tiktokScriptInFolder
+      ? join(result.bundleDir, tiktokScriptInFolder)
+      : (mainText?.includes('tiktok') ? fullPath(mainText) : fullPath(mainText));
 
     const stmt = db().prepare(`
       INSERT INTO generated_assets
@@ -49,18 +51,23 @@ export async function POST(req: NextRequest) {
       contactId,
       insightId ?? null,
       brand,
-      mainText?.includes('tiktok') ? 'tiktok' : 'content',
-      fullPath(mainText),
+      'tiktok',
+      tiktokScriptPath,
       fullPath(carouselCaption),
       result.bundleDir,
     );
 
     db().prepare("UPDATE contacts SET last_generated_at = datetime('now') WHERE id = ?").run(contactId);
 
+    // Level-2 automation: generating content is signal that they're qualified.
+    // Auto-promote any of this contact's Lead-stage deals to Qualified.
+    const moved = autoPromoteContactDeals(contactId, 'content-generated', `Insight: ${insightId ?? '(auto)'}`);
+
     return NextResponse.json({
       asset_id: ins.lastInsertRowid,
       bundle_dir: result.bundleDir,
       files: result.files,
+      auto_promoted: moved,
     });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });
