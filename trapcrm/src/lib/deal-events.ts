@@ -40,7 +40,7 @@ export function getDealHistory(dealId: number): DealEvent[] {
  */
 export function autoPromoteContactDeals(
   contactId: number,
-  event: 'content-generated' | 'video-rendered',
+  event: 'content-generated' | 'video-rendered' | 'scan-requested' | 'scan-delivered' | 'proposal-sent',
   note?: string,
 ): { dealId: number; from: string; to: string }[] {
   ensureHistoryColumn();

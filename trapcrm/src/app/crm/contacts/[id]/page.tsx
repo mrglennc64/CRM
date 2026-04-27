@@ -4,6 +4,7 @@ import { stageInfo } from '@/lib/pipeline';
 import { GenerateButtons } from '../../components/GenerateButtons';
 import { AssetCardClient } from '../../components/AssetCardClient';
 import { AddToPipeline } from '../../components/AddToPipeline';
+import { ScanProposalActions } from '../../components/ScanProposalActions';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -24,11 +25,15 @@ export default function ContactDetail({ params }: { params: { id: string } }) {
     .prepare('SELECT * FROM deals WHERE contact_id = ? ORDER BY updated_at DESC')
     .all(id) as any[];
 
+  const hasScanRequest = assets.some((a) => a.type === 'scan-request');
+  const hasScanReport  = assets.some((a) => a.type === 'scan-report');
+  const hasProposal    = assets.some((a) => a.type === 'proposal');
+
   const insights = listInsights();
 
   return (
     <div className="p-8 max-w-5xl">
-      <Link href="/crm/contacts" className="text-sub hover:text-cyan text-sm">← All contacts</Link>
+      <Link href="/crm/contacts" className="text-sub hover:text-cyan text-sm">&larr; All contacts</Link>
 
       <header className="mt-3 mb-6 pb-6 border-b border-line">
         <div className="flex justify-between items-start">
@@ -36,10 +41,10 @@ export default function ContactDetail({ params }: { params: { id: string } }) {
             <h1 className="text-3xl font-bold tracking-tight">{contact.name}</h1>
             <div className="text-sub mt-2 flex gap-4 text-sm">
               <span className="capitalize">{contact.role ?? '—'}</span>
-              {contact.brand_affinity && <span className={`text-b-${contact.brand_affinity}`}>• {contact.brand_affinity}</span>}
-              {contact.country && <span>• {contact.country}</span>}
-              {contact.followers_est && <span>• {contact.followers_est} followers</span>}
-              {contact.catalog_size_est && <span>• {contact.catalog_size_est} catalog</span>}
+              {contact.brand_affinity && <span className={`text-b-${contact.brand_affinity}`}>&middot; {contact.brand_affinity}</span>}
+              {contact.country && <span>&middot; {contact.country}</span>}
+              {contact.followers_est && <span>&middot; {contact.followers_est} followers</span>}
+              {contact.catalog_size_est && <span>&middot; {contact.catalog_size_est} catalog</span>}
             </div>
           </div>
         </div>
@@ -66,7 +71,7 @@ export default function ContactDetail({ params }: { params: { id: string } }) {
                 <div key={d.id} className="flex items-center gap-3 bg-surface border border-line rounded-md px-4 py-2 text-sm">
                   <span className="text-xs uppercase tracking-wider text-cyan">{info.label}</span>
                   <span className="flex-1 text-ink">{d.title}</span>
-                  <Link href="/crm/deals" className="text-xs text-sub hover:text-cyan">view in pipeline →</Link>
+                  <Link href="/crm/deals" className="text-xs text-sub hover:text-cyan">view in pipeline &rarr;</Link>
                 </div>
               );
             })}
@@ -76,9 +81,20 @@ export default function ContactDetail({ params }: { params: { id: string } }) {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-3">Generate</h2>
+        <h2 className="text-lg font-semibold mb-3">Free scan &amp; cleaning proposal</h2>
+        <ScanProposalActions
+          contactId={contact.id}
+          spotify={contact.spotify}
+          hasScanRequest={hasScanRequest}
+          hasScanReport={hasScanReport}
+          hasProposal={hasProposal}
+        />
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-lg font-semibold mb-3">Generate content</h2>
         <GenerateButtons contactId={contact.id} insights={insights} />
-        <p className="text-xs text-sub mt-2">Generate Content → Review &amp; Edit → Approve &amp; Render Video.</p>
+        <p className="text-xs text-sub mt-2">Generate Content &rarr; Review &amp; Edit &rarr; Approve &amp; Render Video.</p>
       </section>
 
       <section>
